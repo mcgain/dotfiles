@@ -7,7 +7,7 @@
 
 alias c=clear
 alias vi=vim
-
+alias todo=todo2
 
 ###############
 #             #
