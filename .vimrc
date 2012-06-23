@@ -5,6 +5,8 @@ set ignorecase
 set hlsearch
 set nocp
 
+call pathogen#infect()
+
 highlight MatchParen ctermbg=4
 
 map ,, <C-^>
