@@ -28,9 +28,5 @@ fun! s:VisualSearch()
         let @" = old
 endf
 
-
-if has("gui_running")
-        colorscheme solarized
-        set background=dark
-        set nocompatible bs=2
-endif
+set background=dark
+let mapleader=","
