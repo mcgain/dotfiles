@@ -9,6 +9,7 @@ set shiftwidth=2
 set cindent
 set autoindent
 set smarttab
+set cursorline
 
 call pathogen#infect()
 
@@ -19,6 +20,8 @@ syntax enable
   
 " run the tests, this assumes I have a run_tests file
 map <F2> :w\|!clear; ruby spec/run_tests.rb <cr>
+map <F3> :w\|!clear; spec/run_tests.sh <cr>
+ 
 " leader n inserts a newline without leaving normal mode
 map <leader>n o<ESC>
 

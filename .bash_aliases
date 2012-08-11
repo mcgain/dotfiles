@@ -11,6 +11,15 @@ alias reboot='sudo shutdown -r now'
 
 ###############
 #             #
+# navigation  #
+#             #
+###############
+
+alias cdlist='cd ~/Projects/List'
+alias cdblarg='cd ~/Projects/Blarg'
+
+###############
+#             #
 # PERMISSIONS #
 #             #
 ###############
