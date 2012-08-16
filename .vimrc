@@ -29,6 +29,9 @@ map <leader>n o<ESC>
 xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
 xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
 
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+
 fun! s:VisualSearch()
         let old = @" | norm! gvy
         let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')

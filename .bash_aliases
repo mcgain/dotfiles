@@ -17,6 +17,7 @@ alias reboot='sudo shutdown -r now'
 
 alias cdlist='cd ~/Projects/List'
 alias cdblarg='cd ~/Projects/Blarg'
+alias cddynasty='cd ~/Projects/dynasty'
 
 ###############
 #             #
