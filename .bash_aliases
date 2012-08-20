@@ -38,6 +38,7 @@ alias g=git
 alias gs='git status'
 alias gc='git commit'
 alias gl='git log'
+alias gb='git branch'
 alias gd='git diff --color-words'
 alias gga='git ls-files -dmo --exclude-standard | grep $* | xargs -r git add'
 alias gco='git checkout'
