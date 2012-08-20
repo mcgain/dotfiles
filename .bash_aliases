@@ -44,6 +44,12 @@ alias gco='git checkout'
 alias gnb='git checkout -b'
 alias gp='git pull'
 
+######################
+#                    #
+# COMPLETION FOR GIT #
+#                    #
+######################
+
 complete -o default -o nospace -F _git g
 
 function make-completion-wrapper () {
@@ -63,3 +69,9 @@ function make-completion-wrapper () {
 
 make-completion-wrapper _git _git_checkout_mine git checkout
 complete -o bashdefault -o default -o nospace -F _git_checkout_mine gco
+
+make-completion-wrapper _git _git_branch_mine git branch
+complete -o bashdefault -o default -o nospace -F _git_branch_mine gb
+
+
+
