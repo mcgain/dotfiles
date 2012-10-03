@@ -18,6 +18,7 @@ alias reboot='sudo shutdown -r now'
 alias cdlist='cd ~/Projects/List'
 alias cdblarg='cd ~/Projects/Blarg'
 alias cddynasty='cd ~/Projects/dynasty'
+alias cdkutoto='cd ~/Projects/kutotorails'
 
 ###############
 #             #
@@ -44,6 +45,9 @@ alias gga='git ls-files -dmo --exclude-standard | grep $* | xargs -r git add'
 alias gco='git checkout'
 alias gnb='git checkout -b'
 alias gp='git pull'
+alias ga='git add'
+alias gcm='git checkout master'
+alias gcd='git checkout develop'
 
 ######################
 #                    #
