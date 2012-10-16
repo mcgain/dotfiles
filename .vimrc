@@ -57,6 +57,7 @@ map <F3> :call RunTestFile()<cr>
 map <F4> :call RunNearestTest()<cr>
 map <F2> :call RunTests('')<cr>
 map <F5> :call SetTestFile()<cr>
+map <F6> !clear; cucumber<cr>
 
 function! RunTestFile(...)
     if a:0

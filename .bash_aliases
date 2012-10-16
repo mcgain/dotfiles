@@ -9,6 +9,8 @@ alias vi=vim
 alias todo=todo2
 alias reboot='sudo shutdown -r now'
 
+alias ag=ack-grep
+
 ###############
 #             #
 # navigation  #
@@ -48,6 +50,7 @@ alias gp='git pull'
 alias ga='git add'
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
+alias gk='gitk --all &'
 
 ######################
 #                    #
