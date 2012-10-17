@@ -10,6 +10,26 @@ alias todo=todo2
 alias reboot='sudo shutdown -r now'
 
 alias ag=ack-grep
+alias note='~/Projects/notes/notes.sh'
+
+###############
+#             #
+# rails       #
+#             #
+###############
+
+alias r=rails
+alias rs='rails server'
+alias rc='rails console'
+
+###############
+#             #
+# easy editing#
+#             #
+###############
+
+alias bash_aliases='vi ~/.bash_aliases'
+alias vimrc='vi ~/.vimrc'
 
 ###############
 #             #
@@ -51,6 +71,8 @@ alias ga='git add'
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
 alias gk='gitk --all &'
+alias gphd='git push devheroku develop:master'
+alias gpgh='git push origin develop'
 
 ######################
 #                    #
