@@ -10,6 +10,13 @@ set cindent
 set autoindent
 set smarttab
 set cursorline
+"
+"no backup files
+set nobackup       
+"only in case you don't want a backup file while editing
+set nowritebackup  
+"no swap files
+set noswapfile     
 
 call pathogen#infect()
 
