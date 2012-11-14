@@ -42,6 +42,8 @@ alias cdblarg='cd ~/Projects/Blarg'
 alias cddynasty='cd ~/Projects/dynasty'
 alias cdkutoto='cd ~/Projects/kutotorails'
 
+alias explore='xdg-open .'
+
 ###############
 #             #
 # PERMISSIONS #
