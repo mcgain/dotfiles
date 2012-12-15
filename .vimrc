@@ -12,11 +12,11 @@ set smarttab
 set cursorline
 "
 "no backup files
-set nobackup       
+set nobackup
 "only in case you don't want a backup file while editing
-set nowritebackup  
+set nowritebackup
 "no swap files
-set noswapfile     
+set noswapfile
 
 call pathogen#infect()
 
@@ -36,6 +36,10 @@ xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
+
+" DANGER this removes all whitespace at end of lines on write
+" This could screw up files. I guess I will find out which!
+autocmd BufWritePre * :%s/\s\+$//e
 
 fun! s:VisualSearch()
   let old = @" | norm! gvy
@@ -109,7 +113,7 @@ function! RunTests(filename)
   else
     if filereadable("script/test")
       exec ":!script/test " . a:filename
-    elseif filereadable("zeus.json")
+    elseif filereadable(".zeus.sock")
       exec ":!zeus rspec --color " . a:filename
     elseif filereadable("Gemfile")
       exec ":!bundle exec rspec --color " . a:filename
