@@ -107,5 +107,11 @@ complete -o bashdefault -o default -o nospace -F _git_checkout_mine gco
 make-completion-wrapper _git _git_branch_mine git branch
 complete -o bashdefault -o default -o nospace -F _git_branch_mine gb
 
+######################
+#                    #
+# EDUCATIONAL ALIASES#
+#                    #
+######################
 
+alias ipconfig='echo "The ipconfig command here is called ifconfig"'
 
