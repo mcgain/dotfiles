@@ -9,8 +9,18 @@ alias vi=vim
 alias todo=todo2
 alias reboot='sudo shutdown -r now'
 
+
 alias ag=ack-grep
 alias note='~/Projects/notes/notes.sh'
+
+#sudo the command, or if none given, sudo the last thing done.
+s(){
+  if [[ $# == 0 ]]; then
+    sudo $(history -p '!!')
+  else
+    sudo "$@"
+  fi
+}
 
 ###############
 #             #
@@ -21,6 +31,8 @@ alias note='~/Projects/notes/notes.sh'
 alias r=rails
 alias rs='rails server'
 alias rc='rails console'
+
+alias rdbmt='rake db:migrate RAILS_ENV=test'
 
 ###############
 #             #
@@ -77,6 +89,7 @@ alias gk='gitk --all &'
 alias gphd='git push devheroku develop:master'
 alias gpgh='git push origin develop'
 alias grd='git rebase develop'
+alias gmd='current_git_branch=`git symbolic-ref HEAD | cut -d"/" -f 3`; git checkout develop; git merge --no-edit $current_git_branch; git branch -d $current_git_branch'
 
 ######################
 #                    #
@@ -114,4 +127,14 @@ complete -o bashdefault -o default -o nospace -F _git_branch_mine gb
 ######################
 
 alias ipconfig='echo "The ipconfig command here is called ifconfig"'
+
+######################
+#                    #
+#      HEROKU        #
+#                    #
+######################
+
+alias hrc-dev='heroku run console --app devkutoto'
+alias hrc-stag='heroku run console --app stagkutoto'
+alias hrc-prod='heroku run console --app kutotoca'
 
