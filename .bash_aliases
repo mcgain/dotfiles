@@ -34,6 +34,8 @@ alias rc='rails console'
 
 alias rdbmt='rake db:migrate RAILS_ENV=test'
 
+alias pull_production_into_local='heroku pgbackups:capture; curl -o latest.dump `heroku pgbackups:url`; pg_restore --verbos --clean --no-acl --no-owner -h localhost -U mcgain -d kutoto_development latest.dump'
+
 ###############
 #             #
 # easy editing#
