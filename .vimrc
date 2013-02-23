@@ -22,11 +22,23 @@ call pathogen#infect()
 
 highlight MatchParen ctermbg=4
 
+inoremap  <Up>     <NOP>
+inoremap  <Down>   <NOP>
+inoremap  <Left>   <NOP>
+inoremap  <Right>  <NOP>
+noremap   <Up>     <NOP>
+noremap   <Down>   <NOP>
+noremap   <Left>   <NOP>
+noremap   <Right>  <NOP>
+
 map ,, <C-^>
 syntax enable
 
 " leader n inserts a newline without leaving normal mode
 map <leader>n o<ESC>
+
+" K inserts newline under cursor in normal mode
+nnoremap K i<CR><Esc>
 
 " map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
 
