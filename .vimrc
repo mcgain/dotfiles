@@ -60,6 +60,11 @@ fun! s:VisualSearch()
 endf
 
 set background=dark
+"When this isn't here, the left gutter will be grey instead of black when
+"something is wrong.
+highlight clear SignColumn
+
+
 let mapleader=","
 filetype plugin indent on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS

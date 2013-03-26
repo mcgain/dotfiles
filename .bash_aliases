@@ -91,6 +91,8 @@ alias gk='gitk --all &'
 alias gphd='git push devheroku develop:master'
 alias gpgh='git push origin develop'
 alias grd='git rebase develop'
+alias grc='git rebase --continue'
+alias gmt='git mergetool'
 alias gmd='current_git_branch=`git symbolic-ref HEAD | cut -d"/" -f 3`; git checkout develop; git merge --no-edit $current_git_branch; git branch -d $current_git_branch'
 
 ######################
