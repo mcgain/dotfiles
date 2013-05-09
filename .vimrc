@@ -20,6 +20,10 @@ set noswapfile
 
 call pathogen#infect()
 
+"enable powerlines
+"disabled at the moment until I compile python support in
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
 highlight MatchParen ctermbg=4
 
 inoremap  <Up>     <NOP>
@@ -79,6 +83,10 @@ nnoremap <c-l> <c-w>l
 nnoremap Y "+y
 " P pastes from system buffer
 nnoremap P "*p
+
+nnoremap <F7> :set invpaste paste?<CR>
+set pastetoggle=<F7>
+set showmode
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS

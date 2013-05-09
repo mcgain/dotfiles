@@ -8,10 +8,16 @@ alias c=clear
 alias vi=vim
 alias todo=todo2
 alias reboot='sudo shutdown -r now'
-
+alias far="ag -l 'module/summary_bar.' | xargs sed -i 's/summary_bar/summary_bar.css.less/'"
 
 alias ag=ack-grep
 alias note='~/Projects/notes/notes.sh'
+
+#find and replace
+
+#find_and_replace(what_to_include, what_to_find, what_to_replace){
+
+#}
 
 #sudo the command, or if none given, sudo the last thing done.
 s(){
@@ -101,29 +107,32 @@ alias gmd='current_git_branch=`git symbolic-ref HEAD | cut -d"/" -f 3`; git chec
 #                    #
 ######################
 
-complete -o default -o nospace -F _git g
+#complete -o default -o nospace -F _git g
+#
+#function make-completion-wrapper () {
+#  local function_name="$2"
+#    local arg_count=$(($#-3))
+#    local comp_function_name="$1"
+#    shift 2
+#    local function="
+#    function $function_name {
+#      ((COMP_CWORD+=$arg_count))
+#        COMP_WORDS=( "$@" \${COMP_WORDS[@]:1} )
+#        "$comp_function_name"
+#        return 0
+#    }"
+#  eval "$function"
+#}
+#
+#make-completion-wrapper _git _git_checkout_mine git checkout
+#complete -o bashdefault -o default -o nospace -F _git_checkout_mine gco
+#
+#make-completion-wrapper _git _git_branch_mine git branch
+#complete -o bashdefault -o default -o nospace -F _git_branch_mine gb
 
-function make-completion-wrapper () {
-  local function_name="$2"
-    local arg_count=$(($#-3))
-    local comp_function_name="$1"
-    shift 2
-    local function="
-    function $function_name {
-      ((COMP_CWORD+=$arg_count))
-        COMP_WORDS=( "$@" \${COMP_WORDS[@]:1} )
-        "$comp_function_name"
-        return 0
-    }"
-  eval "$function"
-}
-
-make-completion-wrapper _git _git_checkout_mine git checkout
-complete -o bashdefault -o default -o nospace -F _git_checkout_mine gco
-
-make-completion-wrapper _git _git_branch_mine git branch
-complete -o bashdefault -o default -o nospace -F _git_branch_mine gb
-
+__git_complete gco _git_checkout
+__git_complete gb _git_branch
+__
 ######################
 #                    #
 # EDUCATIONAL ALIASES#
