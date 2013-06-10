@@ -1,3 +1,21 @@
+ filetype off " required for vundle!
+ set nocompatible
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+"  " required!
+Bundle 'gmarik/vundle'
+
+Bundle 'kien/ctrlp.vim'
+Bundle "git://github.com/altercation/vim-colors-solarized.git"
+
+let g:solarized_termcolors=256
+syntax enable
+set background=dark
+colorscheme solarized
+
 set tabstop=2
 set expandtab
 set number
@@ -10,15 +28,9 @@ set cindent
 set autoindent
 set smarttab
 set cursorline
-"
-"no backup files
-set nobackup
-"only in case you don't want a backup file while editing
-set nowritebackup
-"no swap files
-set noswapfile
-
-call pathogen#infect()
+set nobackup "no backup files
+set nowritebackup "only in case you don't want a backup file while editing
+set noswapfile "no swap files
 
 "enable powerlines
 "disabled at the moment until I compile python support in
@@ -44,7 +56,6 @@ map <leader>n o<ESC>
 " K inserts newline under cursor in normal mode
 nnoremap K i<CR><Esc>
 
-" map <leader>t :CommandTFlush<cr>\|:CommandT<cr>
 
 " * and # search for next/previous of selected text when used in visual mode
 xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
@@ -160,3 +171,4 @@ function! PromoteToLet()
 endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
+map <leader>t :CtrlP<cr>
