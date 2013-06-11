@@ -18,6 +18,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'Lokaltog/vim-powerline'
 
+
 let g:solarized_termcolors=256
 syntax enable
 set background=dark
@@ -56,6 +57,9 @@ noremap   <Right>  <NOP>
 
 map ,, <C-^>
 syntax enable
+
+" supertab
+imap <tab> g:SuperTabDefaultCompletionType
 
 " leader n inserts a newline without leaving normal mode
 map <leader>n o<ESC>
