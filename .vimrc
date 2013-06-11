@@ -17,7 +17,13 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-easymotion'
 
+" Autoload this file so I don't have to reload when tweaking
+augroup reload_vimrc " {
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
 
 let g:solarized_termcolors=256
 syntax enable
@@ -95,6 +101,8 @@ let mapleader=","
 filetype plugin indent on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
+" tagbar
+map <leader>b :TagbarToggle<CR>
 
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
