@@ -10,6 +10,13 @@ Bundle 'gmarik/vundle'
 
 Bundle 'kien/ctrlp.vim'
 Bundle "git://github.com/altercation/vim-colors-solarized.git"
+Bundle 'ervandew/supertab'
+Bundle 'scrooloose/syntastic'
+Bundle 'majutsushi/tagbar'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-surround'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'Lokaltog/vim-powerline'
 
 let g:solarized_termcolors=256
 syntax enable
@@ -34,7 +41,7 @@ set noswapfile "no swap files
 
 "enable powerlines
 "disabled at the moment until I compile python support in
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 highlight MatchParen ctermbg=4
 
