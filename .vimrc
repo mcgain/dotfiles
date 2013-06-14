@@ -18,6 +18,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'kchmck/vim-coffee-script'
 
 " Autoload this file so I don't have to reload when tweaking
 augroup reload_vimrc " {

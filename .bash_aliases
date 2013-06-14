@@ -41,6 +41,7 @@ alias rc='rails console'
 alias rdbmt='rake db:migrate RAILS_ENV=test'
 
 alias pull_production_into_local='heroku pgbackups:capture; curl -o latest.dump `heroku pgbackups:url`; pg_restore --verbos --clean --no-acl --no-owner -h localhost -U mcgain -d kutoto_development latest.dump'
+alias rjs='RAILS_ENV=test bundle exec rails server -p 13000'
 
 ###############
 #             #
@@ -61,6 +62,7 @@ alias cdlist='cd ~/Projects/List'
 alias cdblarg='cd ~/Projects/Blarg'
 alias cddynasty='cd ~/Projects/dynasty'
 alias cdkutoto='cd ~/Projects/kutotorails'
+alias cdshopify='cd ~/Code/Ruby/shopify'
 
 alias explore='xdg-open .'
 
@@ -93,7 +95,7 @@ alias gpa='git pull develop; git fetch devheroku'
 alias ga='git add'
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
-alias gk='gitk --all &'
+alias gk='gitk --all 2> /dev/null &'
 alias gphd='git push devheroku develop:master'
 alias gpgh='git push origin develop'
 alias grd='git rebase develop'
