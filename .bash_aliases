@@ -34,14 +34,23 @@ s(){
 #             #
 ###############
 
-alias r=rails
-alias rs='rails server'
-alias rc='rails console'
+alias r='bundle exec rails'
+alias rs='bundle exec rails server'
+alias rc='bundle exec rails console'
 
-alias rdbmt='rake db:migrate RAILS_ENV=test'
+alias rdbmt='bundle exec rake db:migrate RAILS_ENV=test'
 
 alias pull_production_into_local='heroku pgbackups:capture; curl -o latest.dump `heroku pgbackups:url`; pg_restore --verbos --clean --no-acl --no-owner -h localhost -U mcgain -d kutoto_development latest.dump'
 alias rjs='RAILS_ENV=test bundle exec rails server -p 13000'
+
+###############
+#             #
+#   shopify   #
+#             #
+###############
+
+alias test='bundle exec rake test PARALLEL=1'
+#alias testjs=
 
 ###############
 #             #
@@ -51,6 +60,7 @@ alias rjs='RAILS_ENV=test bundle exec rails server -p 13000'
 
 alias bash_aliases='vi ~/.bash_aliases'
 alias vimrc='vi ~/.vimrc'
+alias bashrc='vi ~/.bashrc'
 
 ###############
 #             #
@@ -61,7 +71,6 @@ alias vimrc='vi ~/.vimrc'
 alias cdlist='cd ~/Projects/List'
 alias cdblarg='cd ~/Projects/Blarg'
 alias cddynasty='cd ~/Projects/dynasty'
-alias cdkutoto='cd ~/Projects/kutotorails'
 alias cdshopify='cd ~/Code/Ruby/shopify'
 
 alias explore='xdg-open .'
