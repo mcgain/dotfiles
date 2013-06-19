@@ -91,7 +91,7 @@ function colors {
 }
 
 
-export PS1='\n\033[0;31m\W:\033[0;32m$(parse_git_branch)\033[00m\]$ '
+export PS1='\[\033[0;31m\]\W:\[\033[0;32m\]$(parse_git_branch)\[\033[00m\]$ '
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -108,6 +108,10 @@ fi
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
+fi
+
+if [ -f `brew --prefix`/opt/boxen/homebrew/etc/bash_completion.d/git-completion.bash ]; then
+  . `brew --prefix` /opt/boxen/homebrew/etc/bash_completion.d/git-completion.bash
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

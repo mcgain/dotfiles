@@ -35,7 +35,7 @@ s(){
 ###############
 
 alias r='bundle exec rails'
-alias rs='bundle exec rails server'
+alias rs='bundle exec rails server -p 13000'
 alias rc='bundle exec rails console'
 
 alias rdbmt='bundle exec rake db:migrate RAILS_ENV=test'
@@ -111,39 +111,8 @@ alias grd='git rebase develop'
 alias grc='git rebase --continue'
 alias gmt='git mergetool'
 alias gmd='current_git_branch=`git symbolic-ref HEAD | cut -d"/" -f 3`; git checkout develop; git merge --no-edit $current_git_branch; git branch -d $current_git_branch'
+alias gdmb="git branch --merged | grep --extended-regexp --invert-match 'master|\*' | xargs git branch -d"
 
-######################
-#                    #
-# COMPLETION FOR GIT #
-#                    #
-######################
-
-#complete -o default -o nospace -F _git g
-#
-#function make-completion-wrapper () {
-#  local function_name="$2"
-#    local arg_count=$(($#-3))
-#    local comp_function_name="$1"
-#    shift 2
-#    local function="
-#    function $function_name {
-#      ((COMP_CWORD+=$arg_count))
-#        COMP_WORDS=( "$@" \${COMP_WORDS[@]:1} )
-#        "$comp_function_name"
-#        return 0
-#    }"
-#  eval "$function"
-#}
-#
-#make-completion-wrapper _git _git_checkout_mine git checkout
-#complete -o bashdefault -o default -o nospace -F _git_checkout_mine gco
-#
-#make-completion-wrapper _git _git_branch_mine git branch
-#complete -o bashdefault -o default -o nospace -F _git_branch_mine gb
-
-__git_complete gco _git_checkout
-__git_complete gb _git_branch
-__
 ######################
 #                    #
 # EDUCATIONAL ALIASES#
