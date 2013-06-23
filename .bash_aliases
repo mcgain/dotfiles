@@ -62,6 +62,14 @@ alias bash_aliases='vi ~/.bash_aliases'
 alias vimrc='vi ~/.vimrc'
 alias bashrc='vi ~/.bashrc'
 
+function vc() {
+  vi `git show --pretty="format:" --name-only "$@" | tr -s "\\n" " "`;
+}
+
+function vd() {
+  vi `git ls-files --modified --exclude-standard | tr -s "\\n" " "`;
+}
+
 ###############
 #             #
 # navigation  #

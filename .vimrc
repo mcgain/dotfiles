@@ -21,6 +21,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-rails'
+Bundle 'mmozuras/vim-github-comment'
+Bundle 'mattn/webapi-vim'
 
 " Autoload this file so I don't have to reload when tweaking
 augroup reload_vimrc " {
@@ -30,8 +32,15 @@ augroup END " }
 
 let g:solarized_termcolors=256
 syntax enable
-set background=dark
 colorscheme solarized
+set background=dark
+highlight SignColumn ctermbg=234
+highlight LineNr ctermbg=234
+
+"When this isn't here, the left gutter will be grey instead of black when
+"something is wrong.
+" I seem to have fixed the problem, but I will leave this here for posterity
+"highlight clear SignColumn
 
 set tabstop=2
 set expandtab
@@ -94,12 +103,6 @@ fun! s:VisualSearch()
   let @" = old
 endf
 
-set background=dark
-"When this isn't here, the left gutter will be grey instead of black when
-"something is wrong.
-highlight clear SignColumn
-
-
 let mapleader=","
 filetype plugin indent on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -120,6 +123,9 @@ nnoremap P "*p
 nnoremap <F7> :set invpaste paste?<CR>
 set pastetoggle=<F7>
 set showmode
+
+"github
+let g:github_user = 'mcgain'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
@@ -194,3 +200,7 @@ endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
 map <leader>t :CtrlP<cr>
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%121v.\+/
+
