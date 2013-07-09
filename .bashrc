@@ -1,6 +1,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+source ~/git-prompt.sh
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -92,6 +93,7 @@ function colors {
 
 
 export PS1='\[\033[0;31m\]\W:\[\033[0;32m\]$(parse_git_branch)\[\033[00m\]$ '
+#export PS1='\W$(__git_ps1 " (%s)")$ '
 
 # some more ls aliases
 alias ll='ls -alF'

@@ -35,13 +35,13 @@ s(){
 ###############
 
 alias r='bundle exec rails'
-alias rs='bundle exec rails server -p 13000'
+alias rs='bundle exec rails server '
 alias rc='bundle exec rails console'
 
 alias rdbmt='bundle exec rake db:migrate RAILS_ENV=test'
 
 alias pull_production_into_local='heroku pgbackups:capture; curl -o latest.dump `heroku pgbackups:url`; pg_restore --verbos --clean --no-acl --no-owner -h localhost -U mcgain -d kutoto_development latest.dump'
-alias rjs='RAILS_ENV=test bundle exec rails server -p 13000'
+alias rjs='RAILS_ENV=test bundle exec rails server -p 13000 --pid /tmp/rjs.pid'
 
 ###############
 #             #
@@ -101,7 +101,7 @@ alias make_executable='chmod 755'
 alias g=git
 alias gs='git status'
 alias gc='git commit'
-alias gl='git log'
+alias gl='git log --oneline --graph'
 alias gb='git branch'
 alias gd='git diff --color-words'
 alias gga='git ls-files -dmo --exclude-standard | grep $* | xargs -r git add'
@@ -116,6 +116,7 @@ alias gk='gitk --all 2> /dev/null &'
 alias gphd='git push devheroku develop:master'
 alias gpgh='git push origin develop'
 alias grd='git rebase develop'
+alias grm='git rebase master'
 alias grc='git rebase --continue'
 alias gmt='git mergetool'
 alias gmd='current_git_branch=`git symbolic-ref HEAD | cut -d"/" -f 3`; git checkout develop; git merge --no-edit $current_git_branch; git branch -d $current_git_branch'
