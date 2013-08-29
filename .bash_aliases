@@ -37,6 +37,7 @@ s(){
 alias r='bundle exec rails'
 alias rs='bundle exec rails server '
 alias rc='bundle exec rails console'
+alias be='bundle exec'
 
 alias rdbmt='bundle exec rake db:migrate RAILS_ENV=test'
 
@@ -51,6 +52,7 @@ alias rjs='RAILS_ENV=test bundle exec rails server -p 13000 --pid /tmp/rjs.pid'
 
 alias test='bundle exec rake test PARALLEL=1'
 #alias testjs=
+alias clearcache="redis-cli -p 16379 flushall && echo \"flush_all\" | nc  127.0.0.1 21211"
 
 ###############
 #             #
@@ -121,6 +123,12 @@ alias grc='git rebase --continue'
 alias gmt='git mergetool'
 alias gmd='current_git_branch=`git symbolic-ref HEAD | cut -d"/" -f 3`; git checkout develop; git merge --no-edit $current_git_branch; git branch -d $current_git_branch'
 alias gdmb="git branch --merged | grep --extended-regexp --invert-match 'master|\*' | xargs git branch -d"
+alias gcb="git symbolic-ref --short HEAD"
+
+function hob() {
+  current_branch="$(git symbolic-ref --short HEAD)"
+  hub browse "Shopify/shopify/tree/$current_branch"
+}
 
 ######################
 #                    #
