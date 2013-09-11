@@ -9,6 +9,9 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
+#EDITOR
+EDITOR=vim; export EDITOR
+
 #every time bash shows a prompt, add previous command to master history, then restore from master history
 export PROMPT_COMMAND="history -a; history -n"
 

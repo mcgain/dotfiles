@@ -86,13 +86,14 @@ map <leader>n o<ESC>
 " K inserts newline under cursor in normal mode
 nnoremap K i<CR><Esc>
 
+" ;a is <ESC>
+inoremap ;a <Esc>
+
+
 
 " * and # search for next/previous of selected text when used in visual mode
 xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
 xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
-
-" tagbar
-nmap <F8> :TagbarToggle<CR>
 
 " DANGER this removes all whitespace at end of lines on write
 " This could screw up files. I guess I will find out which!
@@ -136,6 +137,12 @@ map <F4> :call RunNearestTest()<cr>
 map <F2> :call RunTests('')<cr>
 map <F5> :call SetTestFile()<cr>
 map <F6> !clear; cucumber<cr>
+
+"nmap <leader>l :wall|call Tester()<cr>
+
+function! Tester()
+  !bundle exec rake test PARALLEL=1 TEST=%
+endfunction
 
 function! RunTestFile(...)
   if a:0
