@@ -20,10 +20,10 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'mileszs/ack.vim'
-Bundle 'tpope/vim-rails'
 Bundle 'mmozuras/vim-github-comment'
 Bundle 'mattn/webapi-vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tomtom/tcomment_vim'
 
 " Autoload this file so I don't have to reload when tweaking
 augroup reload_vimrc " {
@@ -51,6 +51,7 @@ set hlsearch
 set nocp
 set softtabstop=2
 set shiftwidth=2
+set scrolloff=5 "alway have 5 lines at top/bottom of file when scrolling
 set cindent
 set autoindent
 set smarttab
@@ -89,7 +90,12 @@ nnoremap K i<CR><Esc>
 " ;a is <ESC>
 inoremap ;a <Esc>
 
+"1.8 to 1.9 Hash
+nnoremap <Leader>: :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
 
+
+
+"remap caps lock
 
 " * and # search for next/previous of selected text when used in visual mode
 xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
