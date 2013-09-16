@@ -38,6 +38,7 @@ alias r='bundle exec rails'
 alias rs='bundle exec rails server '
 alias rc='bundle exec rails console'
 alias be='bundle exec'
+alias bi='bundle install -j 8'
 
 alias rdbmt='bundle exec rake db:migrate RAILS_ENV=test'
 

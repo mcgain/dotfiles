@@ -13,17 +13,32 @@ Bundle "git://github.com/altercation/vim-colors-solarized.git"
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
-Bundle 'airblade/vim-gitgutter'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'mileszs/ack.vim'
-Bundle 'mmozuras/vim-github-comment'
 Bundle 'mattn/webapi-vim'
-Bundle 'tpope/vim-fugitive'
 Bundle 'tomtom/tcomment_vim'
+
+" git
+Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-fugitive'
+Bundle 'mmozuras/vim-github-comment'
+
+" ruby
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-rake.git'
+Bundle 'tpope/vim-rails'
+
+" custom text objects
+Bundle 'kana/vim-textobj-user.git'
+Bundle 'kana/vim-textobj-entire.git'
+Bundle 'kana/vim-textobj-indent.git'
+Bundle 'kana/vim-textobj-syntax.git'
+Bundle 'kana/vim-textobj-line.git'
+Bundle 'nelstrom/vim-textobj-rubyblock.git'
 
 " Autoload this file so I don't have to reload when tweaking
 augroup reload_vimrc " {
@@ -92,10 +107,6 @@ inoremap ;a <Esc>
 
 "1.8 to 1.9 Hash
 nnoremap <Leader>: :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
-
-
-
-"remap caps lock
 
 " * and # search for next/previous of selected text when used in visual mode
 xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
