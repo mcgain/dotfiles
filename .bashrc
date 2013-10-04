@@ -161,3 +161,4 @@ __git_shortcut () {
 __git_shortcut blubber checkout
 
 source /opt/boxen/env.sh
+alias convert=conv

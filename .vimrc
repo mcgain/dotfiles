@@ -102,6 +102,8 @@ map <leader>n o<ESC>
 " K inserts newline under cursor in normal mode
 nnoremap K i<CR><Esc>
 
+" statusbar always
+set laststatus=2
 " ;a is <ESC>
 inoremap ;a <Esc>
 
@@ -129,10 +131,19 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " tagbar
 map <leader>b :TagbarToggle<CR>
 
+" better splits
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+set splitbelow
+set splitright
+
+set winwidth=84
+set winheight=5
+set winminheight=5
+set winheight=999
 
 " Y copies to system buffer
 nnoremap Y "+y

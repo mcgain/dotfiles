@@ -66,11 +66,11 @@ alias vimrc='vi ~/.vimrc'
 alias bashrc='vi ~/.bashrc'
 
 function vc() {
-  vi `git show --pretty="format:" --name-only "$@" | tr -s "\\n" " "`;
+  vi -O `git show --pretty="format:" --name-only "$@" | tr -s "\\n" " "`;
 }
 
 function vd() {
-  vi `git ls-files --modified --exclude-standard | tr -s "\\n" " "`;
+  vi -O `git ls-files --modified --exclude-standard | tr -s "\\n" " "`;
 }
 
 ###############
@@ -122,9 +122,18 @@ alias grd='git rebase develop'
 alias grm='git rebase master'
 alias grc='git rebase --continue'
 alias gmt='git mergetool'
-alias gmd='current_git_branch=`git symbolic-ref HEAD | cut -d"/" -f 3`; git checkout develop; git merge --no-edit $current_git_branch; git branch -d $current_git_branch'
+alias gmd='current_git_branch=`current_branch`; git checkout develop; git merge --no-edit $current_git_branch; git branch -d $current_git_branch'
 alias gdmb="git branch --merged | grep --extended-regexp --invert-match 'master|\*' | xargs git branch -d"
 alias gcb="git symbolic-ref --short HEAD"
+alias gpc="git_push_current_branch"
+
+function current_branch() {
+  git symbolic-ref HEAD | cut -d"/" -f 3
+}
+
+function git_push_current_branch() {
+  git push -u origin $1`current_branch`
+}
 
 function hob() {
   current_branch="$(git symbolic-ref --short HEAD)"
