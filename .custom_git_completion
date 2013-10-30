@@ -1,0 +1,11 @@
+_gco_completion()
+{
+    local cur branches
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    branches=`git branch | cut -c 3-`
+    COMPREPLY=( $(compgen -W "${branches}" -- ${cur}) )
+    return 0
+}
+
+complete -o bashdefault -o default -o nospace -F _gco_completion gco
