@@ -1,6 +1,10 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+function my_complete() {
+  echo "my_complete called"
+}
+
 source ~/git-prompt.sh
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -116,6 +120,10 @@ fi
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
+fi
+
+if [ -f ~/.custom_git_completion]; then
+  . ~/.custom_git_completion
 fi
 
 if [ -f `brew --prefix`/opt/boxen/homebrew/etc/bash_completion.d/git-completion.bash ]; then

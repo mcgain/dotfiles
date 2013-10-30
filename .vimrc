@@ -40,6 +40,9 @@ Bundle 'kana/vim-textobj-syntax.git'
 Bundle 'kana/vim-textobj-line.git'
 Bundle 'nelstrom/vim-textobj-rubyblock.git'
 
+"required for vim-textobj-rubyblock
+runtime macros/matchit.vim
+
 " Autoload this file so I don't have to reload when tweaking
 augroup reload_vimrc " {
   autocmd!
@@ -140,10 +143,10 @@ nnoremap <c-l> <c-w>l
 set splitbelow
 set splitright
 
-set winwidth=84
-set winheight=5
-set winminheight=5
-set winheight=999
+" set winwidth=84
+" set winheight=5
+" set winminheight=5
+" set winheight=999
 
 " Y copies to system buffer
 nnoremap Y "+y

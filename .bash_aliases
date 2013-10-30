@@ -9,10 +9,13 @@ alias vi=vim
 alias todo=todo2
 alias reboot='sudo shutdown -r now'
 alias far="ag -l 'module/summary_bar.' | xargs sed -i 's/summary_bar/summary_bar.css.less/'"
+alias f="find -n"
 
 alias ag=ack-grep
 alias note='~/Projects/notes/notes.sh'
-
+function resource() {
+  source ~/.bash_aliases
+}
 #find and replace
 
 #find_and_replace(what_to_include, what_to_find, what_to_replace){
@@ -44,6 +47,8 @@ alias rdbmt='bundle exec rake db:migrate RAILS_ENV=test'
 
 alias pull_production_into_local='heroku pgbackups:capture; curl -o latest.dump `heroku pgbackups:url`; pg_restore --verbos --clean --no-acl --no-owner -h localhost -U mcgain -d kutoto_development latest.dump'
 alias rjs='RAILS_ENV=test bundle exec rails server -p 13000 --pid /tmp/rjs.pid'
+
+#zeus test `git status -s | grep -e "^ M test/" --color=none | cut -c 4-`
 
 ###############
 #             #
@@ -104,7 +109,7 @@ alias make_executable='chmod 755'
 alias g=git
 alias gs='git status'
 alias gc='git commit'
-alias gl='git log --oneline --graph'
+alias gl='git log --oneline --graph --decorate=full'
 alias gb='git branch'
 alias gd='git diff --color-words'
 alias gga='git ls-files -dmo --exclude-standard | grep $* | xargs -r git add'
@@ -126,9 +131,18 @@ alias gmd='current_git_branch=`current_branch`; git checkout develop; git merge 
 alias gdmb="git branch --merged | grep --extended-regexp --invert-match 'master|\*' | xargs git branch -d"
 alias gcb="git symbolic-ref --short HEAD"
 alias gpc="git_push_current_branch"
+alias grlm="git_rebase_onto_latest_master"
 
 function current_branch() {
   git symbolic-ref HEAD | cut -d"/" -f 3
+}
+
+function git_rebase_onto_latest_master() {
+  temp_current_branch= current_branch
+  git checkout master
+  git pull
+  git checkout "$temp_current_branch"
+  git rebase master
 }
 
 function git_push_current_branch() {
@@ -147,6 +161,7 @@ function hob() {
 ######################
 
 alias ipconfig='echo "The ipconfig command here is called ifconfig"'
+alias symbolic-ref='echo "The command to create symbolic links is ln -s source dest"'
 
 ######################
 #                    #
