@@ -1,5 +1,4 @@
-_gco_completion()
-{
+_gco_completion() {
     local cur branches
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"

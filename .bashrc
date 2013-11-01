@@ -122,7 +122,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if [ -f ~/.custom_git_completion]; then
+if [ -f ~/.custom_git_completion ]; then
   . ~/.custom_git_completion
 fi
 
