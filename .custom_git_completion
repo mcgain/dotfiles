@@ -8,3 +8,4 @@ _gco_completion() {
 }
 
 complete -o bashdefault -o default -o nospace -F _gco_completion gco
+complete -o bashdefault -o default -o nospace -F _gco_completion gb
