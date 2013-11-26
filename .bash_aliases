@@ -22,6 +22,11 @@ function resource() {
 
 #}
 
+# most used commands in percentage format
+function most_used_commands() {
+  history | awk '($2 ~ /^[[:alnum:]]+$/) { ++a[$2]; t = length($2); if (t > l) l = t; } END { for (i in a) printf("%s%" (l - length(i) + 1) "s%5.2f%%\n", i, " ", (a[i] * 100 / NR)); }' | sort -n -k2
+}
+
 #sudo the command, or if none given, sudo the last thing done.
 s(){
   if [[ $# == 0 ]]; then
@@ -134,14 +139,14 @@ alias gpc="git_push_current_branch"
 alias grlm="git_rebase_onto_latest_master"
 
 function current_branch() {
-  git symbolic-ref HEAD | cut -d"/" -f 3
+  git symbolic-ref HEAD | sed 's/refs\/heads\///'
 }
 
 function git_rebase_onto_latest_master() {
   temp_current_branch= current_branch
   git checkout master
   git pull
-  git checkout "$temp_current_branch"
+  git checkout $temp_current_branch
   git rebase master
 }
 
