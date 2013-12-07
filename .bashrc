@@ -5,7 +5,9 @@ function my_complete() {
   echo "my_complete called"
 }
 
-source ~/git-prompt.sh
+if [ -f ~/git-prompt.sh ]; then
+  source ~/git-prompt.sh
+fi
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
