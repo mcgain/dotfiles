@@ -1,5 +1,9 @@
- filetype off " required for vundle!
- set nocompatible
+"Richard McGain's Dotfiles
+
+
+filetype off " required for vundle!
+set nocompatible
+set encoding=utf-8
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -20,6 +24,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'mileszs/ack.vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'dockyard/vim-easydir'
 
 " git
 Bundle 'airblade/vim-gitgutter'
@@ -79,11 +84,11 @@ set nowritebackup "only in case you don't want a backup file while editing
 set noswapfile "no swap files
 
 "enable powerlines
-"disabled at the moment until I compile python support in
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 highlight MatchParen ctermbg=4
 
+"disabling these keys should help me stop reaching for those keys
 inoremap  <Up>     <NOP>
 inoremap  <Down>   <NOP>
 inoremap  <Left>   <NOP>
@@ -111,7 +116,7 @@ set laststatus=2
 inoremap ;a <Esc>
 
 "1.8 to 1.9 Hash
-nnoremap <Leader>: :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
+nnoremap <Leader>; :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
 
 " * and # search for next/previous of selected text when used in visual mode
 xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
@@ -128,6 +133,7 @@ fun! s:VisualSearch()
 endf
 
 let mapleader=","
+
 filetype plugin indent on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
@@ -170,6 +176,7 @@ function! PromoteToLet()
   :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
   :normal ==
 endfunction
+
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
 map <leader>t :CtrlP<cr>
@@ -183,7 +190,6 @@ let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-stan
 let g:ctrlp_match_func = { 'match': 'GoodMatch' }
 
 function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
-
   " Create a cache file if not yet exists
   let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
   if !( filereadable(cachefile) && a:items == readfile(cachefile) )
@@ -202,5 +208,4 @@ function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
   let cmd = cmd.a:str
 
   return split(system(cmd), "\n")
-
 endfunction

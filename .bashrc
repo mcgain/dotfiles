@@ -15,6 +15,10 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
+#make sed work properly on mac
+export LC_CTYPE=C
+export LANG=C
+
 #EDITOR
 EDITOR=vim; export EDITOR
 
