@@ -105,7 +105,7 @@ function colors {
 }
 
 
-export PS1='\[\033[0;31m\]\W:\[\033[0;32m\]$(parse_git_branch)\[\033[00m\]$ '
+export PS1='\[\033[0;31m\]\W:\[\033[0;32m\]$(parse_git_branch)\[\033[00m\]→ '
 #export PS1='\W$(__git_ps1 " (%s)")$ '
 
 # some more ls aliases
@@ -130,10 +130,6 @@ fi
 
 if [ -f ~/.custom_git_completion ]; then
   . ~/.custom_git_completion
-fi
-
-if [ -f `brew --prefix`/opt/boxen/homebrew/etc/bash_completion.d/git-completion.bash ]; then
-  . `brew --prefix` /opt/boxen/homebrew/etc/bash_completion.d/git-completion.bash
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
@@ -174,5 +170,8 @@ __git_shortcut () {
 
 __git_shortcut blubber checkout
 
-source /opt/boxen/env.sh
+if [ -f /opt/boxen/env.sh ]; then
+  source /opt/boxen/env.sh
+fi
+
 alias convert=conv
