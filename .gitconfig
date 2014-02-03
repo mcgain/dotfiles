@@ -1,0 +1,38 @@
+[advice]
+  pushNonFastForward = false
+  statusHints = false
+  commitBeforeMerge = false
+  resolveConflict = false
+  detachedHead = false
+
+[hub]
+  protocol = https
+
+[credential]
+  helper = /opt/boxen/bin/boxen-git-credential
+
+[core]
+	excludesfile = /Users/richardmcgain/.gitignore-global
+	editor = vim
+
+[user]
+	email = richard.mcgain@shopify.com
+  name = "Richard McGain"
+
+[color]
+  ui = true
+
+[push]
+	default = matching
+
+[init]
+	templatedir = ~/.git_template
+
+[alias]
+	ctags = !.git/hooks/ctags
+
+[mergetool]
+  keepBackup = false
+  tool = vimdiff
+[merge]
+	tool = vimdiff
