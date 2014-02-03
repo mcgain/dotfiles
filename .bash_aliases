@@ -10,8 +10,8 @@ alias todo=todo2
 alias reboot='sudo shutdown -r now'
 alias far="ag -l 'module/summary_bar.' | xargs sed -i 's/summary_bar/summary_bar.css.less/'"
 alias f="find -n"
+alias ack=ag
 
-alias ag=ack-grep
 alias note='~/Projects/notes/notes.sh'
 function resource() {
   source ~/.bash_aliases
@@ -61,7 +61,20 @@ alias rjs='RAILS_ENV=test bundle exec rails server -p 13000 --pid /tmp/rjs.pid'
 #             #
 ###############
 
-alias test='bundle exec rake test PARALLEL=1'
+# alias test='bundle exec rake test PARALLEL=1'
+
+function test() {
+  script/testonly
+  # if [ -e .zeus.sock ]; then
+  #   bundle exec zeus test $@;
+  # elif grep -q "spring-commands-testunit" Gemfile; then
+  #     bundle exec spring testunit $@;
+  # else
+  #   bundle exec ruby -Itest $@;
+  # fi
+}
+
+alias t='test'
 #alias testjs=
 alias clearcache="redis-cli -p 16379 flushall && echo \"flush_all\" | nc  127.0.0.1 21211"
 
@@ -93,6 +106,7 @@ alias cdlist='cd ~/Projects/List'
 alias cdblarg='cd ~/Projects/Blarg'
 alias cddynasty='cd ~/Projects/dynasty'
 alias cdshopify='cd ~/Code/Ruby/shopify'
+alias cdquality='cd ~/Code/Ruby/quality_bot'
 
 alias explore='xdg-open .'
 
@@ -137,6 +151,7 @@ alias gdmb="git branch --merged | grep --extended-regexp --invert-match 'master|
 alias gcb="git symbolic-ref --short HEAD"
 alias gpc="git_push_current_branch"
 alias grlm="git_rebase_onto_latest_master"
+alias gdmb="diff_merge_base"
 
 function current_branch() {
   git symbolic-ref HEAD | sed 's/refs\/heads\///'
@@ -144,10 +159,9 @@ function current_branch() {
 
 function git_rebase_onto_latest_master() {
   temp_current_branch= current_branch
-  git checkout master
-  git pull
+  git fetch origin
   git checkout $temp_current_branch
-  git rebase master
+  git rebase origin/master
 }
 
 function git_push_current_branch() {
@@ -157,6 +171,11 @@ function git_push_current_branch() {
 function hob() {
   current_branch="$(git symbolic-ref --short HEAD)"
   hub browse "Shopify/shopify/tree/$current_branch"
+}
+
+function diff_merge_base() {
+  base=$(git merge-base master `current_branch`)
+  git diff --color-words $base
 }
 
 ######################

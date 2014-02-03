@@ -1,9 +1,27 @@
 "Richard McGain's Dotfiles
-
+" r :normal = awesome
+" "
+"
+" nmap Q j.
+" nmap Q <nop>
+"
+"
+" :norm or :normal = awesome
+" r :normal = awesome
+"
+" :xnoremap . :norm.<CR>
+"
+" r :normal = awesome
+"
+"
+" /term/e - poition cursor at end of match
+"
+" :help search
+" :h offset
 
 filetype off " required for vundle!
 set nocompatible
-set encoding=utf-8
+"set encoding=utf-8
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -21,10 +39,11 @@ Bundle 'tpope/vim-surround'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'dockyard/vim-easydir'
+Bundle 'croaker/mustang-vim'
 
 " git
 Bundle 'airblade/vim-gitgutter'
@@ -56,7 +75,7 @@ augroup END " }
 
 let g:solarized_termcolors=256
 syntax enable
-colorscheme solarized
+colorscheme mustang
 set background=dark
 highlight SignColumn ctermbg=234
 highlight LineNr ctermbg=234
@@ -88,6 +107,9 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 highlight MatchParen ctermbg=4
 
+filetype plugin indent on
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
 "disabling these keys should help me stop reaching for those keys
 inoremap  <Up>     <NOP>
 inoremap  <Down>   <NOP>
@@ -98,25 +120,38 @@ noremap   <Down>   <NOP>
 noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
-map ,, <C-^>
-syntax enable
+" jk is escape
+inoremap jk <esc>
+inoremap fj <esc>
 
 " supertab
 imap <tab> g:SuperTabDefaultCompletionType
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"      LEADER KEYS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let mapleader=","
+
 " leader n inserts a newline without leaving normal mode
 map <leader>n o<ESC>
 
-" K inserts newline under cursor in normal mode
-nnoremap K i<CR><Esc>
+"1.8 to 1.9 Hash
+nnoremap <Leader>; :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
+
+"Last file in jumplist
+map ,, <C-^>
 
 " statusbar always
 set laststatus=2
 " ;a is <ESC>
 inoremap ;a <Esc>
 
-"1.8 to 1.9 Hash
-nnoremap <Leader>; :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
+" tagbar
+map <leader>b :TagbarToggle<CR>
+
+" K inserts newline under cursor in normal mode
+nnoremap K i<CR><Esc>
 
 " * and # search for next/previous of selected text when used in visual mode
 xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
@@ -131,14 +166,6 @@ fun! s:VisualSearch()
   let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')
   let @" = old
 endf
-
-let mapleader=","
-
-filetype plugin indent on
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-" tagbar
-map <leader>b :TagbarToggle<CR>
 
 " better splits
 nnoremap <c-j> <c-w>j
@@ -159,12 +186,18 @@ nnoremap Y "+y
 " P pastes from system buffer
 nnoremap P "*p
 
-nnoremap <F7> :set invpaste paste?<CR>
-set pastetoggle=<F7>
+nnoremap <c-m> :set invpaste paste?<CR>
+set pastetoggle=<c-m>
 set showmode
 
+set wildmenu            " visual autocomplete for command menu
+" set lazyredraw          " redraw only when we need to. SEEMS VERY SLOW
 "github
 let g:github_user = 'mcgain'
+
+" Goto next git hunk
+nmap <leader>n <Plug>GitGutterNextHunk
+nmap <leader>N <Plug>GitGutterPrevHunk
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROMOTE VARIABLE TO RSPEC LET

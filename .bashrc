@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 #make sed work properly on mac
-export LC_CTYPE=C
-export LANG=C
+#export LC_CTYPE=C
+#export LANG=C
 
 #EDITOR
 EDITOR=vim; export EDITOR
