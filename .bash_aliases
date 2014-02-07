@@ -3,6 +3,8 @@
 # GENERAL     #
 #             #
 ###############
+#
+alias v="cd ~/code/ruby/vagrant; vagrant ssh"
 
 alias c=clear
 alias vi=vim
