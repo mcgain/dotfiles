@@ -170,14 +170,24 @@ function git_push_current_branch() {
   git push -u origin $1`current_branch`
 }
 
+function ssh_to_guest() {
+  ssh 192.168.211.1
+  $1
+  exit
+}
+
 function hob() {
   current_branch="$(git symbolic-ref --short HEAD)"
-  hub browse "Shopify/shopify/tree/$current_branch"
+  if hash hub 2>/dev/null; then
+    hub browse "Shopify/shopify/tree/$current_branch"
+  else
+    ssh_to_guest "open http://www.github.com/shopify/Shopify/compare/$current_branch"
+  fi
 }
 
 function diff_merge_base() {
   base=$(git merge-base master `current_branch`)
-  git diff --color-words $base
+    git diff --color-words $base
 }
 
 ######################

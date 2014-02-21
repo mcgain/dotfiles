@@ -122,7 +122,7 @@ noremap   <Right>  <NOP>
 
 " jk is escape
 inoremap jk <esc>
-inoremap fj <esc>
+inoremap fj <esc>:w<cr>
 
 " supertab
 imap <tab> g:SuperTabDefaultCompletionType
