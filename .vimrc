@@ -186,8 +186,8 @@ nnoremap Y "+y
 " P pastes from system buffer
 nnoremap P "*p
 
-nnoremap <c-m> :set invpaste paste?<CR>
-set pastetoggle=<c-m>
+" nnoremap <c-m> :set invpaste paste?<CR>
+" set pastetoggle=<c-m>
 set showmode
 
 set wildmenu            " visual autocomplete for command menu
