@@ -105,7 +105,7 @@ function colors {
 }
 
 
-export PS1='\[\033[0;31m\]\W:\[\033[0;32m\]$(parse_git_branch)\[\033[00m\]→ '
+export PS1='\[\033[0;31m\]\W:\[\033[0;32m\]$(parse_git_branch)\[\033[00m\]| '
 #export PS1='\W$(__git_ps1 " (%s)")$ '
 
 # some more ls aliases
@@ -124,9 +124,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
+# if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+#     . /etc/bash_completion
+# fi
 
 if [ -f ~/.custom_git_completion ]; then
   . ~/.custom_git_completion
@@ -138,11 +138,11 @@ export TERM="xterm-256color"
 # Apparently this stuff will speed up ruby see
 # https://gist.github.com/1688857
 # for details
-export RUBY_HEAP_MIN_SLOTS=1000000
-export RUBY_HEAP_SLOTS_INCREMENT=1000000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_GC_MALLOC_LIMIT=100000000
-export RUBY_HEAP_FREE_MIN=500000
+# export RUBY_HEAP_MIN_SLOTS=1000000
+# export RUBY_HEAP_SLOTS_INCREMENT=1000000
+# export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
+# export RUBY_GC_MALLOC_LIMIT=100000000
+# export RUBY_HEAP_FREE_MIN=500000
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

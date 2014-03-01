@@ -44,6 +44,8 @@ Bundle 'mattn/webapi-vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'dockyard/vim-easydir'
 Bundle 'croaker/mustang-vim'
+"Exchange two regions of text with cx
+Bundle 'tommcdo/vim-exchange'
 
 " git
 Bundle 'airblade/vim-gitgutter'
@@ -73,9 +75,14 @@ augroup reload_vimrc " {
   autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
 
-let g:solarized_termcolors=256
 syntax enable
+
 colorscheme mustang
+if &diff
+  let g:solarized_termcolors=256
+  colorscheme solarized
+endif
+
 set background=dark
 highlight SignColumn ctermbg=234
 highlight LineNr ctermbg=234
@@ -123,6 +130,7 @@ noremap   <Right>  <NOP>
 " jk is escape
 inoremap jk <esc>
 inoremap fj <esc>:w<cr>
+nnoremap fj :w<cr>
 
 " supertab
 imap <tab> g:SuperTabDefaultCompletionType

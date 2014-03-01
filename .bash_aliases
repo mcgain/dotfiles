@@ -65,8 +65,8 @@ alias rjs='RAILS_ENV=test bundle exec rails server -p 13000 --pid /tmp/rjs.pid'
 
 # alias test='bundle exec rake test PARALLEL=1'
 
-function test() {
-  script/testonly
+# function my_test() {
+  # script/testonly
   # if [ -e .zeus.sock ]; then
   #   bundle exec zeus test $@;
   # elif grep -q "spring-commands-testunit" Gemfile; then
@@ -74,9 +74,8 @@ function test() {
   # else
   #   bundle exec ruby -Itest $@;
   # fi
-}
+# }
 
-alias t='test'
 #alias testjs=
 alias clearcache="redis-cli -p 16379 flushall && echo \"flush_all\" | nc  127.0.0.1 21211"
 
@@ -130,7 +129,7 @@ alias make_executable='chmod 755'
 alias g=git
 alias gs='git status'
 alias gc='git commit'
-alias gl='git log --oneline --graph --decorate=full'
+alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gb='git branch'
 alias gd='git diff --color-words'
 alias gga='git ls-files -dmo --exclude-standard | grep $* | xargs -r git add'
@@ -172,15 +171,20 @@ function git_push_current_branch() {
 
 function ssh_to_guest() {
   ssh 192.168.211.1
+  echo "echo ssh"
+  echo $1
   $1
   exit
 }
 
 function hob() {
+  echo "hov"
   current_branch="$(git symbolic-ref --short HEAD)"
   if hash hub 2>/dev/null; then
+    echo "hubbing"
     hub browse "Shopify/shopify/tree/$current_branch"
   else
+    echo "sshinfg"
     ssh_to_guest "open http://www.github.com/shopify/Shopify/compare/$current_branch"
   fi
 }
