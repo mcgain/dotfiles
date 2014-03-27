@@ -105,8 +105,7 @@ function colors {
 }
 
 
-export PS1='\[\033[0;31m\]\W:\[\033[0;32m\]$(parse_git_branch)\[\033[00m\]| '
-#export PS1='\W$(__git_ps1 " (%s)")$ '
+export PS1='\[\033[0;31m\]\W:\[\033[0;32m\]$(parse_git_branch)\[\033[00m\]: '
 
 # some more ls aliases
 alias ll='ls -alF'
