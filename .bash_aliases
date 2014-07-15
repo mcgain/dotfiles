@@ -14,6 +14,8 @@ alias far="ag -l 'module/summary_bar.' | xargs sed -i 's/summary_bar/summary_bar
 alias f="find -n"
 alias ack=ag
 
+alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f 1 -d ' ' | xargs kill -9"
+
 alias note='~/Projects/notes/notes.sh'
 function resource() {
   source ~/.bash_aliases
@@ -36,6 +38,24 @@ s(){
   else
     sudo "$@"
   fi
+}
+
+function dalek(){
+  echo ""
+  echo "                      $1, you will be EXTERMINATED!     "
+  echo "                      /"
+  echo "                 ___"
+  echo "         D>=G==='   '."
+  echo "               |======|"
+  echo "               |======|"
+  echo "           )--/]IIIIII]"
+  echo "              |_______|"
+  echo "              C O O O D"
+  echo "             C O  O  O D"
+  echo "            C  O  O  O  D"
+  echo "            C__O__O__O__D"
+  echo "           [_____________]"
+  echo ""
 }
 
 ###############
@@ -148,11 +168,12 @@ alias grm='git rebase master'
 alias grc='git rebase --continue'
 alias gmt='git mergetool'
 alias gmd='current_git_branch=`current_branch`; git checkout develop; git merge --no-edit $current_git_branch; git branch -d $current_git_branch'
-alias gdmb="git branch --merged | grep --extended-regexp --invert-match 'master|\*' | xargs git branch -d"
+# alias gdmb="git branch --merged | grep --extended-regexp --invert-match 'master|\*' | xargs git branch -d"
 alias gcb="git symbolic-ref --short HEAD"
 alias gpc="git_push_current_branch"
 alias grlm="git_rebase_onto_latest_master"
 alias gdmb="diff_merge_base"
+alias gcp="git cherry-pick"
 
 function current_branch() {
   git symbolic-ref HEAD | sed 's/refs\/heads\///'
@@ -190,7 +211,7 @@ function hob() {
 }
 
 function diff_merge_base() {
-  base=$(git merge-base master `current_branch`)
+  base=$(git merge-base origin/master `current_branch`)
     git diff --color-words $base
 }
 
@@ -213,3 +234,4 @@ alias hrc-dev='heroku run console --app devkutoto'
 alias hrc-stag='heroku run console --app stagkutoto'
 alias hrc-prod='heroku run console --app kutotoca'
 
+alias test='be spring testunit'

@@ -132,6 +132,10 @@ if [ -f ~/.custom_git_completion ]; then
   . ~/.custom_git_completion
 fi
 
+if [ -f ~/.bash_vagrant ]; then
+  . ~/.bash_vagrant
+fi
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export TERM="xterm-256color"
 
@@ -146,6 +150,10 @@ export TERM="xterm-256color"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+#colourise less output
+export LESS='-R'
+export LESSOPEN='|~/.lessfilter %s'
 
 __define_git_completion () {
 eval "
@@ -175,3 +183,8 @@ if [ -f /opt/boxen/env.sh ]; then
 fi
 
 alias convert=conv
+
+
+if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+  tmux a -t shopify-tmux-session
+fi

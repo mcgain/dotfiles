@@ -32,11 +32,11 @@ Bundle 'gmarik/vundle'
 
 Bundle 'kien/ctrlp.vim'
 Bundle "git://github.com/altercation/vim-colors-solarized.git"
+Bundle "sickill/vim-monokai"
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-surround'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'rking/ag.vim'
@@ -47,7 +47,13 @@ Bundle 'croaker/mustang-vim'
 "Exchange two regions of text with cx
 Bundle 'tommcdo/vim-exchange'
 
-" git
+" Powerline equivalents
+" Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
+let g:airline_powerline_fonts = 1
+"enable powerlines
+" set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
 Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-fugitive'
 Bundle 'mmozuras/vim-github-comment'
@@ -66,6 +72,11 @@ Bundle 'kana/vim-textobj-syntax.git'
 Bundle 'kana/vim-textobj-line.git'
 Bundle 'nelstrom/vim-textobj-rubyblock.git'
 
+"Some new ones from a tope talk
+Bundle 'tpope/vim-endwise.git'
+
+"dispatch is a test runner
+" Bundle 'tpope/vim-dispatch.git'
 "required for vim-textobj-rubyblock
 runtime macros/matchit.vim
 
@@ -78,6 +89,7 @@ augroup END " }
 syntax enable
 
 colorscheme mustang
+" colorscheme monokai
 if &diff
   let g:solarized_termcolors=256
   colorscheme solarized
@@ -90,7 +102,7 @@ highlight LineNr ctermbg=234
 "When this isn't here, the left gutter will be grey instead of black when
 "something is wrong.
 " I seem to have fixed the problem, but I will leave this here for posterity
-"highlight clear SignColumn
+" highlight clear SignColumn
 
 set tabstop=2
 set expandtab
@@ -109,9 +121,6 @@ set nobackup "no backup files
 set nowritebackup "only in case you don't want a backup file while editing
 set noswapfile "no swap files
 
-"enable powerlines
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-
 highlight MatchParen ctermbg=4
 
 filetype plugin indent on
@@ -127,8 +136,7 @@ noremap   <Down>   <NOP>
 noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
-" jk is escape
-inoremap jk <esc>
+"fj  is escape
 inoremap fj <esc>:w<cr>
 nnoremap fj :w<cr>
 
@@ -140,9 +148,6 @@ imap <tab> g:SuperTabDefaultCompletionType
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader=","
-
-" leader n inserts a newline without leaving normal mode
-map <leader>n o<ESC>
 
 "1.8 to 1.9 Hash
 nnoremap <Leader>; :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
@@ -207,27 +212,13 @@ let g:github_user = 'mcgain'
 nmap <leader>n <Plug>GitGutterNextHunk
 nmap <leader>N <Plug>GitGutterPrevHunk
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PROMOTE VARIABLE TO RSPEC LET
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! PromoteToLet()
-  :normal! dd
-  " :exec '?^\s*it\>'
-  :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-  :normal ==
-endfunction
-
-:command! PromoteToLet :call PromoteToLet()
-:map <leader>p :PromoteToLet<cr>
-map <leader>t :CtrlP<cr>
-
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%121v.\+/
 
+"CtrlP stuff
 let g:path_to_matcher = "/usr/local/bin/matcher"
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard']
-
+map <leader>t :CtrlP<cr>
 let g:ctrlp_match_func = { 'match': 'GoodMatch' }
 
 function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
