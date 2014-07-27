@@ -4,7 +4,7 @@
 #             #
 ###############
 #
-alias v="cd ~/code/ruby/vagrant; vagrant ssh"
+alias v="cd ~/code/ruby/vagrant; vagrant ssh; "
 
 alias c=clear
 alias vi=vim
@@ -234,3 +234,4 @@ alias hrc-stag='heroku run console --app stagkutoto'
 alias hrc-prod='heroku run console --app kutotoca'
 
 alias test='be spring testunit'
+alias crusader_kings_saves="cd /Users/richardmcgain/Documents/Paradox\ Interactive/Crusader\ Kings\ II/save\ games"
