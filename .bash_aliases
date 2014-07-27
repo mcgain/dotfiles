@@ -16,15 +16,14 @@ alias ack=ag
 
 alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f 1 -d ' ' | xargs kill -9"
 
+#find and replace in a directory
+# far /usr/bin /foo/bar/
+function far() { find "$1" -type f | xargs perl -pi -e "s$2g"; }
+
 alias note='~/Projects/notes/notes.sh'
 function resource() {
   source ~/.bash_aliases
 }
-#find and replace
-
-#find_and_replace(what_to_include, what_to_find, what_to_replace){
-
-#}
 
 # most used commands in percentage format
 function most_used_commands() {

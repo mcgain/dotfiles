@@ -47,6 +47,9 @@ Bundle 'croaker/mustang-vim'
 "Exchange two regions of text with cx
 Bundle 'tommcdo/vim-exchange'
 
+"Thin vertical lines on indents
+Bundle 'Yggdroot/indentLine'
+
 " Powerline equivalents
 " Bundle 'Lokaltog/vim-powerline'
 Bundle 'bling/vim-airline'
@@ -214,6 +217,11 @@ nmap <leader>N <Plug>GitGutterPrevHunk
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%121v.\+/
+
+let g:indentLine_enabled = 0
+let g:indentLine_color_term = 239
+let g:indentLine_char = '|'
+nmap <F6> :IndentLinesToggle<CR>
 
 "CtrlP stuff
 let g:path_to_matcher = "/usr/local/bin/matcher"
