@@ -235,4 +235,5 @@ alias hrc-stag='heroku run console --app stagkutoto'
 alias hrc-prod='heroku run console --app kutotoca'
 
 alias test='be spring testunit'
+alias tunnel_to_vagrant='ssh -N -L 37521:localhost:37521 vagrant@192.168.211.38'
 alias crusader_kings_saves="cd /Users/richardmcgain/Documents/Paradox\ Interactive/Crusader\ Kings\ II/save\ games"
