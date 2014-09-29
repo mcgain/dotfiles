@@ -78,6 +78,17 @@ Bundle 'nelstrom/vim-textobj-rubyblock.git'
 "Some new ones from a tope talk
 Bundle 'tpope/vim-endwise.git'
 
+"Yankring keeps yank history
+" 1p paste the last delete
+" 2p paste the second last
+Bundle 'vim-scripts/YankRing.vim.git'
+
+" GO
+Bundle 'fatih/vim-go'
+
+" Lua
+Bundle 'vim-scripts/lua.vim'
+Bundle 'vim-scripts/vim-misc'
 "dispatch is a test runner
 " Bundle 'tpope/vim-dispatch.git'
 "required for vim-textobj-rubyblock

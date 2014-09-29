@@ -181,8 +181,9 @@ function current_branch() {
 function git_rebase_onto_latest_master() {
   temp_current_branch= current_branch
   git fetch origin
+  git branch -f master origin/master
   git checkout $temp_current_branch
-  git rebase origin/master
+  git rebase master
 }
 
 function git_push_current_branch() {

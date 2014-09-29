@@ -8,6 +8,7 @@ function my_complete() {
 if [ -f ~/git-prompt.sh ]; then
   source ~/git-prompt.sh
 fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -138,15 +139,6 @@ fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export TERM="xterm-256color"
 
-# Apparently this stuff will speed up ruby see
-# https://gist.github.com/1688857
-# for details
-# export RUBY_HEAP_MIN_SLOTS=1000000
-# export RUBY_HEAP_SLOTS_INCREMENT=1000000
-# export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-# export RUBY_GC_MALLOC_LIMIT=100000000
-# export RUBY_HEAP_FREE_MIN=500000
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
@@ -187,3 +179,6 @@ alias convert=conv
 if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
   tmux a -t shopify-tmux-session
 fi
+
+export PGUSER=postgres
+export PATH="$PATH:~/src/AWS-ElasticBeanstalk-CLI-2.6.3/eb/linux/python2.7/"
