@@ -19,78 +19,78 @@
 " :help search
 " :h offset
 
-filetype off " required for vundle!
 set nocompatible
-"set encoding=utf-8
+filetype off " required for vundle!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 " let Vundle manage Vundle
 "  " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'kien/ctrlp.vim'
-Bundle "git://github.com/altercation/vim-colors-solarized.git"
-Bundle "sickill/vim-monokai"
-Bundle 'ervandew/supertab'
-Bundle 'scrooloose/syntastic'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-surround'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'rking/ag.vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'dockyard/vim-easydir'
-Bundle 'croaker/mustang-vim'
-"Exchange two regions of text with cx
-Bundle 'tommcdo/vim-exchange'
+Plugin 'kien/ctrlp.vim'
+Plugin 'git://github.com/altercation/vim-colors-solarized.git'
+Plugin 'sickill/vim-monokai'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-surround'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'rking/ag.vim'
+Plugin 'mattn/webapi-vim'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'dockyard/vim-easydir'
+Plugin 'croaker/mustang-vim'
+Plugin 'tommcdo/vim-exchange' "Exchange two regions of text with cx
 
-"Thin vertical lines on indents
-Bundle 'Yggdroot/indentLine'
+Plugin 'Yggdroot/indentLine' "Thin vertical lines on indents
 
 " Powerline equivalents
 " Bundle 'Lokaltog/vim-powerline'
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
 "enable powerlines
 " set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
-Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-fugitive'
-Bundle 'mmozuras/vim-github-comment'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'mmozuras/vim-github-comment'
 
 " ruby
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-bundler'
-Bundle 'tpope/vim-rake.git'
-Bundle 'tpope/vim-rails'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-rake.git'
+Plugin 'tpope/vim-rails'
 
 " custom text objects
-Bundle 'kana/vim-textobj-user.git'
-Bundle 'kana/vim-textobj-entire.git'
-Bundle 'kana/vim-textobj-indent.git'
-Bundle 'kana/vim-textobj-syntax.git'
-Bundle 'kana/vim-textobj-line.git'
-Bundle 'nelstrom/vim-textobj-rubyblock.git'
+Plugin 'kana/vim-textobj-user.git'
+Plugin 'kana/vim-textobj-entire.git'
+Plugin 'kana/vim-textobj-indent.git'
+Plugin 'kana/vim-textobj-syntax.git'
+Plugin 'kana/vim-textobj-line.git'
+Plugin 'nelstrom/vim-textobj-rubyblock.git'
 
 "Some new ones from a tope talk
-Bundle 'tpope/vim-endwise.git'
+Plugin 'tpope/vim-endwise.git'
 
 "Yankring keeps yank history
 " 1p paste the last delete
 " 2p paste the second last
-Bundle 'vim-scripts/YankRing.vim.git'
+Plugin 'vim-scripts/YankRing.vim.git'
 
 " GO
-Bundle 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 
 " Lua
-Bundle 'vim-scripts/lua.vim'
-Bundle 'vim-scripts/vim-misc'
+Plugin 'vim-scripts/lua.vim'
+Plugin 'vim-scripts/vim-misc'
 "dispatch is a test runner
 " Bundle 'tpope/vim-dispatch.git'
+
+call vundle#end()            " required by Vundle
+
 "required for vim-textobj-rubyblock
 runtime macros/matchit.vim
 
@@ -99,6 +99,7 @@ augroup reload_vimrc " {
   autocmd!
   autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
+
 
 syntax enable
 
