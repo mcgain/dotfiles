@@ -117,9 +117,6 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-#this
-export VIMRUNTIME=/usr/share/vim/vim73
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
