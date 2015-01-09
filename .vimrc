@@ -30,7 +30,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
-Plugin 'git://github.com/altercation/vim-colors-solarized.git'
+Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'sickill/vim-monokai'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/syntastic'
@@ -88,6 +88,11 @@ Plugin 'vim-scripts/lua.vim'
 Plugin 'vim-scripts/vim-misc'
 "dispatch is a test runner
 " Bundle 'tpope/vim-dispatch.git'
+
+"Rust
+Plugin 'wting/rust.vim'
+
+Plugin 'rizzatti/dash.vim' "Dash documentation lookup service
 
 call vundle#end()            " required by Vundle
 
@@ -234,6 +239,8 @@ let g:indentLine_enabled = 0
 let g:indentLine_color_term = 239
 let g:indentLine_char = '|'
 nmap <F6> :IndentLinesToggle<CR>
+
+nmap <silent> <leader>d <Plug>DashSearch "map Dash lookup of word under cursor to ,d
 
 "CtrlP stuff
 let g:path_to_matcher = "/usr/local/bin/matcher"

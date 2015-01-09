@@ -133,6 +133,10 @@ if [ -f ~/.bash_vagrant ]; then
   . ~/.bash_vagrant
 fi
 
+if [ -f ~/.gorc ]; then
+  . ~/.gorc
+fi
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export TERM="xterm-256color"
 
