@@ -4,7 +4,7 @@
 #             #
 ###############
 #
-alias v="cd ~/code/ruby/vagrant; vagrant ssh; "
+alias v="cd ~/vagrant2; vagrant ssh; "
 
 alias c=clear
 alias vi=vim
