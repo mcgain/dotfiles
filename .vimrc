@@ -181,7 +181,7 @@ set laststatus=2
 inoremap ;a <Esc>
 
 " tagbar
-map <leader>b :TagbarToggle<CR>
+map <leader>/ :TagbarToggle<CR>
 
 " K inserts newline under cursor in normal mode
 nnoremap K i<CR><Esc>
@@ -245,8 +245,35 @@ nmap <silent> <leader>d <Plug>DashSearch "map Dash lookup of word under cursor t
 "CtrlP stuff
 let g:path_to_matcher = "/usr/local/bin/matcher"
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard']
-map <leader>t :CtrlP<cr>
+" map <leader>t :CtrlP<cr>
 let g:ctrlp_match_func = { 'match': 'GoodMatch' }
+
+" Run a given vim command on the results of fuzzy selecting from a given shell
+" command. See usage below.
+function! SelectaCommand(choice_command, selecta_args, vim_command)
+  try
+    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+  catch /Vim:Interrupt/
+    " Swallow the ^C so that the redraw below happens; otherwise there will be
+    " leftovers from selecta on the screen
+    redraw!
+    return
+  endtry
+  redraw!
+  exec a:vim_command . " " . selection
+endfunction
+
+" Find all files in all non-dot directories starting in the working directory.
+" Fuzzy select one of those. Open the selected file with :e.
+nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":e")<cr>
+
+function! SelectaBuffer()
+  let buffers = map(range(1, bufnr("$")), 'bufname(bufnr(v:val))')
+  call SelectaCommand('echo "' . join(buffers, "\n") . '"', "", ":b")
+endfunction
+
+" Fuzzy select a buffer. Open the selected buffer with :b.
+nnoremap <leader>b :call SelectaBuffer()<cr>
 
 function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
   " Create a cache file if not yet exists

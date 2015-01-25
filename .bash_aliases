@@ -187,6 +187,7 @@ function git_rebase_onto_latest_master() {
 }
 
 function git_push_current_branch() {
+#don't allow force push of master
   git push -u origin $1`current_branch`
 }
 
