@@ -14,8 +14,11 @@ alias reboot='sudo shutdown -r now'
 alias far="ag -l 'module/summary_bar.' | xargs sed -i 's/summary_bar/summary_bar.css.less/'"
 alias f="find -n"
 alias ack=ag
+alias cds='cd ~/src/shopify'
 
 alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f 1 -d ' ' | xargs kill -9"
+
+alias babs='babushka'
 
 #find and replace in a directory
 # far /usr/bin /foo/bar/

@@ -40,3 +40,5 @@
   renameLimit = 1323
 [pull]
 	rebase = true
+[help]
+	autocorrect = 1
