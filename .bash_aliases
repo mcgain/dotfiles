@@ -5,6 +5,7 @@
 ###############
 #
 alias v="cd ~/vagrant2; vagrant ssh; "
+alias vu="cd ~/vagrant2; vagrant up; "
 
 alias c=clear
 alias vi=vim
