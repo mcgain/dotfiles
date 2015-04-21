@@ -47,6 +47,8 @@ Plugin 'tommcdo/vim-exchange' "Exchange two regions of text with cx
 
 Plugin 'Yggdroot/indentLine' "Thin vertical lines on indents
 
+Plugin 'terryma/vim-multiple-cursors' "
+
 " Powerline equivalents
 " Bundle 'Lokaltog/vim-powerline'
 Plugin 'bling/vim-airline'
@@ -74,6 +76,7 @@ Plugin 'nelstrom/vim-textobj-rubyblock.git'
 
 "Some new ones from a tope talk
 Plugin 'tpope/vim-endwise.git'
+Plugin 'tpope/vim-abolish.git'
 
 "Yankring keeps yank history
 " 1p paste the last delete
@@ -92,6 +95,12 @@ Plugin 'vim-scripts/vim-misc'
 "Rust
 Plugin 'wting/rust.vim'
 
+"Markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
+
+
 Plugin 'rizzatti/dash.vim' "Dash documentation lookup service
 
 call vundle#end()            " required by Vundle
@@ -107,6 +116,8 @@ augroup END " }
 
 
 syntax enable
+"force *.md to markdown instead of modula-2
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 colorscheme mustang
 " colorscheme monokai
