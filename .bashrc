@@ -183,3 +183,4 @@ fi
 
 export PGUSER=postgres
 export PATH="$PATH:~/src/AWS-ElasticBeanstalk-CLI-2.6.3/eb/linux/python2.7/"
+export PRY=1 #for shopify
