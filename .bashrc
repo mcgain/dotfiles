@@ -84,6 +84,12 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
+if [[ $(hostname) == vagrant* ]]; then
+  am_i_vagrant="[V]"
+else
+  am_i_vagrant=""
+fi
+
 alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
 #setopt promptsubst
 function colors {
@@ -105,8 +111,8 @@ function colors {
   local WHITEBOLD="\[\033[1;37m\]"
 }
 
+export PS1="\[\e[00;33m\]$am_i_vagrant\[\e[0m\]\[\e[00;31m\]\W\[\033[0;37m\]|\[\033[0;32m\]$(parse_git_branch)\[\e[0m\]: "
 
-export PS1='\[\033[0;31m\]\W:\[\033[0;32m\]$(parse_git_branch)\[\033[00m\]: '
 
 # some more ls aliases
 alias ll='ls -alF'
