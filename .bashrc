@@ -111,7 +111,7 @@ function colors {
   local WHITEBOLD="\[\033[1;37m\]"
 }
 
-export PS1="\[\e[00;33m\]$am_i_vagrant\[\e[0m\]\[\e[00;31m\]\W\[\033[0;37m\]|\[\033[0;32m\]$(parse_git_branch)\[\e[0m\]: "
+export PS1='\[\e[00;33m\]$am_i_vagrant\[\e[0m\]\[\e[00;31m\]\W\[\033[0;37m\]|\[\033[0;32m\]$(parse_git_branch)\[\e[0m\]: '
 
 
 # some more ls aliases
