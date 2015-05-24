@@ -182,3 +182,11 @@ fi
 export PGUSER=postgres
 export PATH="$PATH:~/src/AWS-ElasticBeanstalk-CLI-2.6.3/eb/linux/python2.7/"
 export PRY=1 #for shopify
+
+# load all the files in .bash
+shopt -s dotglob
+for file in  ~/.bash/*
+do
+  source $file
+done
+shopt -u dotglob
