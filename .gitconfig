@@ -9,7 +9,6 @@
   protocol = https
 
 [credential]
-  helper = /opt/boxen/bin/boxen-git-credential
 
 [core]
 	excludesfile = /Users/richardmcgain/.gitignore-global

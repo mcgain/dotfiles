@@ -1,10 +1,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-function my_complete() {
-  echo "my_complete called"
-}
-
 if [ -f ~/git-prompt.sh ]; then
   source ~/git-prompt.sh
 fi
@@ -175,10 +171,6 @@ __git_shortcut () {
 }
 
 __git_shortcut blubber checkout
-
-if [ -f /opt/boxen/env.sh ]; then
-  source /opt/boxen/env.sh
-fi
 
 alias convert=conv
 
