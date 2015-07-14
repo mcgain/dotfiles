@@ -27,7 +27,7 @@ function far() { find "$1" -type f | xargs perl -pi -e "s$2g"; }
 
 alias note='~/Projects/notes/notes.sh'
 function resource() {
-  source ~/.bash_aliases
+  source ~/.bashrc
 }
 
 # most used commands in percentage format

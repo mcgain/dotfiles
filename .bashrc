@@ -190,3 +190,7 @@ do
   source $file
 done
 shopt -u dotglob
+
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+chruby 2.1.1
