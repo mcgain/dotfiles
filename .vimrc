@@ -52,7 +52,13 @@ Plugin 'terryma/vim-multiple-cursors' "
 " Powerline equivalents
 " Bundle 'Lokaltog/vim-powerline'
 Plugin 'bling/vim-airline'
+let g:airline#extensions#syntastic#enabled = 1
+
 let g:airline_powerline_fonts = 1
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = ''
+
 "enable powerlines
 " set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
