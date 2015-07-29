@@ -178,6 +178,7 @@ alias gpc="git_push_current_branch"
 alias grlm="git_rebase_onto_latest_master"
 alias gdmb="diff_merge_base"
 alias gcp="git cherry-pick"
+alias gsq="git reset --soft `git merge-base HEAD master`; git commit"
 
 function current_branch() {
   git symbolic-ref HEAD | sed 's/refs\/heads\///'

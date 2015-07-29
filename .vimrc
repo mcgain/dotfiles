@@ -49,6 +49,8 @@ Plugin 'Yggdroot/indentLine' "Thin vertical lines on indents
 
 Plugin 'terryma/vim-multiple-cursors' "
 
+Plugin 'endel/flashdevelop.vim' "actionscript and flash
+
 " Powerline equivalents
 " Bundle 'Lokaltog/vim-powerline'
 Plugin 'bling/vim-airline'
