@@ -5,6 +5,11 @@ if [ -f ~/git-prompt.sh ]; then
   source ~/git-prompt.sh
 fi
 
+#MYSQL
+MYSQL=/usr/local/mysql/bin
+# export DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH
+
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -174,11 +179,6 @@ __git_shortcut blubber checkout
 
 alias convert=conv
 
-
-if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
-  tmux a -t shopify-tmux-session
-fi
-
 export PGUSER=postgres
 export PATH="$PATH:~/src/AWS-ElasticBeanstalk-CLI-2.6.3/eb/linux/python2.7/"
 export PRY=1 #for shopify
@@ -194,7 +194,8 @@ shopt -u dotglob
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 source /etc/profile.d/chruby.sh
-chruby 2.1.1
 
 export NVM_DIR="/home/vagrant/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+chruby 2.2.3
