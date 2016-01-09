@@ -4,8 +4,8 @@
 #             #
 ###############
 #
-alias v="cd ~/vagrant2; vagrant ssh; "
-alias vu="cd ~/vagrant2; vagrant up; "
+alias v="cd ~/src/vagrant; vagrant ssh; "
+alias vu="cd ~/src/vagrant; vagrant up; "
 
 alias c=clear
 alias vi=vim
@@ -14,7 +14,8 @@ alias reboot='sudo shutdown -r now'
 alias far="ag -l $1 | xargs sed -i 's/$1/$2/'"
 alias f="find -n"
 alias ack=ag
-alias cds='cd ~/src/shopify'
+alias cds='cd ~/src/'
+alias cdss='cd ~/src/shopify'
 alias blog='cd /Users/richardmcgain/OneDrive/Blog\ Posts'
 
 alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f 1 -d ' ' | xargs kill -9"
