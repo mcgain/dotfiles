@@ -193,4 +193,8 @@ shopt -u dotglob
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
+source /etc/profile.d/chruby.sh
 chruby 2.1.1
+
+export NVM_DIR="/home/vagrant/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
