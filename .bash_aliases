@@ -3,7 +3,7 @@
 # GENERAL     #
 #             #
 ###############
-#
+
 alias v="cd ~/src/vagrant; vagrant ssh; "
 alias vu="cd ~/src/vagrant; vagrant up; "
 
@@ -16,7 +16,9 @@ alias f="find -n"
 alias ack=ag
 alias cds='cd ~/src/'
 alias cdss='cd ~/src/shopify'
+alias cdsg='cd ~/src/go/src'
 alias blog='cd /Users/richardmcgain/OneDrive/Blog\ Posts'
+alias cdrg='cd ~/src/go/src/railgun'
 
 alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f 1 -d ' ' | xargs kill -9"
 

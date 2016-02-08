@@ -91,8 +91,37 @@ Plugin 'tpope/vim-abolish.git'
 " 2p paste the second last
 Plugin 'vim-scripts/YankRing.vim.git'
 
+"Now I'm using <leader>o for opening files, in normal mode I need to disable
+" the default thing for new tabs
+nmap <leader>t <ESC>
+
 " GO
 Plugin 'fatih/vim-go'
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+"open current target in split
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+
+"open godoc under cursor
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+"list of interfaces implemented by type
+au FileType go nmap <Leader>s <Plug>(go-implements)
+
+"tags
+set tags=./tags;/
 
 " Lua
 Plugin 'vim-scripts/lua.vim'
@@ -259,7 +288,8 @@ let g:indentLine_color_term = 239
 let g:indentLine_char = '|'
 nmap <F6> :IndentLinesToggle<CR>
 
-nmap <silent> <leader>d <Plug>DashSearch "map Dash lookup of word under cursor to ,d
+"map Dash lookup of word under cursor to ,d
+nmap <silent> <leader>d <Plug>DashSearch
 
 "CtrlP stuff
 let g:path_to_matcher = "/usr/local/bin/matcher"
@@ -284,7 +314,7 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":e")<cr>
+nnoremap <leader>o :call SelectaCommand("find * -type f", "", ":e")<cr>
 
 function! SelectaBuffer()
   let buffers = map(range(1, bufnr("$")), 'bufname(bufnr(v:val))')
