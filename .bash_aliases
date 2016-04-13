@@ -4,6 +4,12 @@
 #             #
 ###############
 
+
+function dev_to_development_version() {
+  __sourced_path="/Users/richardmcgain/src/dev/dev.sh"
+}
+
+
 alias v="cd ~/src/vagrant; vagrant ssh; "
 alias vu="cd ~/src/vagrant; vagrant up; "
 
@@ -23,6 +29,11 @@ alias cdrg='cd ~/src/go/src/railgun'
 alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f 1 -d ' ' | xargs kill -9"
 
 alias babs='babushka'
+
+#dev aliases
+alias dc='dev cd'
+alias du='dev up'
+alias dd='dev down'
 
 #find and replace in a directory
 # far /usr/bin /foo/bar/
@@ -71,9 +82,9 @@ function dalek(){
 #             #
 ###############
 
-alias r='bundle exec rails'
-alias rs='bundle exec rails server '
-alias rc='bundle exec rails console'
+alias r='bin/rails'
+alias rs='bin/rails server'
+alias rc='bin/rails console'
 alias be='bundle exec'
 alias bi='bundle install -j 8'
 
@@ -181,7 +192,10 @@ alias gpc="git_push_current_branch"
 alias grlm="git_rebase_onto_latest_master"
 alias gdmb="diff_merge_base"
 alias gcp="git cherry-pick"
-alias gsq="git reset --soft `git merge-base HEAD master`; git commit"
+
+function gsq() {
+  git rebase -i `git merge-base HEAD master`
+}
 
 function current_branch() {
   git symbolic-ref HEAD | sed 's/refs\/heads\///'

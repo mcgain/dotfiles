@@ -189,6 +189,8 @@ set nobackup "no backup files
 set nowritebackup "only in case you don't want a backup file while editing
 set noswapfile "no swap files
 
+set clipboard=unnamed "use system keyboard
+
 highlight MatchParen ctermbg=4
 
 filetype plugin indent on
