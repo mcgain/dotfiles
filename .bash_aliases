@@ -31,9 +31,12 @@ alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f
 alias babs='babushka'
 
 #dev aliases
+alias d='dev'
 alias dc='dev cd'
-alias du='dev up'
+# alias du='dev up' #conflicts with (d)isk(u)sage du
 alias dd='dev down'
+
+alias knife='cd ~/.chef && bundle exec knife && cd -'
 
 #find and replace in a directory
 # far /usr/bin /foo/bar/

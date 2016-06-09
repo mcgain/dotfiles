@@ -30,6 +30,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'
+Plugin 'nixprime/cpsm'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'sickill/vim-monokai'
 Plugin 'ervandew/supertab'
@@ -44,7 +45,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'dockyard/vim-easydir'
 Plugin 'croaker/mustang-vim'
 Plugin 'tommcdo/vim-exchange' "Exchange two regions of text with cx
-
+" Plugin 'roman/golden-ratio'
 Plugin 'Yggdroot/indentLine' "Thin vertical lines on indents
 
 Plugin 'terryma/vim-multiple-cursors' "
@@ -188,6 +189,7 @@ set cursorline
 set nobackup "no backup files
 set nowritebackup "only in case you don't want a backup file while editing
 set noswapfile "no swap files
+set synmaxcol=80 "only do syntax highlighting up to 200 chars on long lines
 
 set clipboard=unnamed "use system keyboard
 
@@ -298,6 +300,7 @@ let g:path_to_matcher = "/usr/local/bin/matcher"
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard']
 " map <leader>t :CtrlP<cr>
 let g:ctrlp_match_func = { 'match': 'GoodMatch' }
+let g:ctrlp_use_caching = 0
 
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
@@ -316,7 +319,8 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>o :call SelectaCommand("find * -type f", "", ":e")<cr>
+" nnoremap <leader>o :call SelectaCommand("find * -type f", "", ":e")<cr>
+nnoremap <leader>o :CtrlP<cr>
 
 function! SelectaBuffer()
   let buffers = map(range(1, bufnr("$")), 'bufname(bufnr(v:val))')
@@ -324,7 +328,7 @@ function! SelectaBuffer()
 endfunction
 
 " Fuzzy select a buffer. Open the selected buffer with :b.
-nnoremap <leader>b :call SelectaBuffer()<cr>
+" nnoremap <leader>b :call SelectaBuffer()<cr>
 
 function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
   " Create a cache file if not yet exists
