@@ -43,3 +43,6 @@
 	autocorrect = 1
 [web]
 	browser = open
+[diff]
+  colorwords = true
+  compactionHeuristic = true

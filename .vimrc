@@ -208,7 +208,7 @@ noremap   <Down>   <NOP>
 noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
-"fj  is escape
+"fj  is escape and write
 inoremap fj <esc>:w<cr>
 nnoremap fj :w<cr>
 
@@ -261,16 +261,6 @@ nnoremap <c-l> <c-w>l
 set splitbelow
 set splitright
 
-" set winwidth=84
-" set winheight=5
-" set winminheight=5
-" set winheight=999
-
-" Y copies to system buffer
-nnoremap Y "+y
-" P pastes from system buffer
-nnoremap P "*p
-
 " nnoremap <c-m> :set invpaste paste?<CR>
 " set pastetoggle=<c-m>
 set showmode
@@ -284,6 +274,7 @@ let g:github_user = 'mcgain'
 nmap <leader>n <Plug>GitGutterNextHunk
 nmap <leader>N <Plug>GitGutterPrevHunk
 
+"highlight lines that are too long
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%121v.\+/
 
@@ -350,3 +341,5 @@ function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
 
   return split(system(cmd), "\n")
 endfunction
+
+iabbr bpry require'pry-byebug';binding.pry
