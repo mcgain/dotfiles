@@ -34,10 +34,9 @@ Plugin 'nixprime/cpsm'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'sickill/vim-monokai'
 Plugin 'ervandew/supertab'
-Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-surround'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-repeat'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'rking/ag.vim'
 Plugin 'mattn/webapi-vim'
@@ -45,35 +44,18 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'dockyard/vim-easydir'
 Plugin 'croaker/mustang-vim'
 Plugin 'tommcdo/vim-exchange' "Exchange two regions of text with cx
-" Plugin 'roman/golden-ratio'
 Plugin 'Yggdroot/indentLine' "Thin vertical lines on indents
 
 Plugin 'terryma/vim-multiple-cursors' "
 
-Plugin 'endel/flashdevelop.vim' "actionscript and flash
-
-" Powerline equivalents
-" Bundle 'Lokaltog/vim-powerline'
 Plugin 'bling/vim-airline'
-let g:airline#extensions#syntastic#enabled = 1
-
-let g:airline_powerline_fonts = 1
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-let g:airline_section_z = ''
-
-"enable powerlines
-" set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+" Complete github usernames with C-x C-o
+Plugin 'tpope/vim-rhubarb'
 Plugin 'mmozuras/vim-github-comment'
 
-" ruby
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-rake.git'
-Plugin 'tpope/vim-rails'
 
 " custom text objects
 Plugin 'kana/vim-textobj-user.git'
@@ -82,19 +64,45 @@ Plugin 'kana/vim-textobj-indent.git'
 Plugin 'kana/vim-textobj-syntax.git'
 Plugin 'kana/vim-textobj-line.git'
 Plugin 'nelstrom/vim-textobj-rubyblock.git'
+Plugin 'wellle/targets.vim.git' "so many more text objects
+Plugin 'michaeljsmith/vim-indent-object.git' "does this do the same thing as
+" the indent thing above
+
+Plugin 'justinmk/vim-sneak'
 
 "Some new ones from a tope talk
 Plugin 'tpope/vim-endwise.git'
 Plugin 'tpope/vim-abolish.git'
 
-"Yankring keeps yank history
-" 1p paste the last delete
-" 2p paste the second last
-Plugin 'vim-scripts/YankRing.vim.git'
+"unixy filesystem stuff like proper file renames using :Move,
+":Mkdir, :Chmod, :Remove, :Rename, :SudoWrite
+Plugin 'tpope/vim-eunuch'
 
+" ruby
+Plugin 'vim-ruby/vim-ruby'
+let g:ruby_indent_assignment_style = 'variable'
+
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-rake.git'
+Plugin 'tpope/vim-rails'
+
+autocmd FileType ruby setlocal iskeyword+=?,! " include ? and ! in ruby words
+
+"evaluate ruby inline
+Plugin 't9md/vim-ruby-xmpfilter'
+autocmd FileType ruby nmap <buffer> <leader>m <Plug>(xmpfilter-mark)
+autocmd FileType ruby xmap <buffer> <leader>m <Plug>(xmpfilter-mark)
+autocmd FileType ruby imap <buffer> <leader>m <Plug>(xmpfilter-mark)
+
+autocmd FileType ruby nmap <buffer> <leader>r <Plug>(xmpfilter-run)
+autocmd FileType ruby xmap <buffer> <leader>r <Plug>(xmpfilter-run)
+autocmd FileType ruby imap <buffer> <leader>r <Plug>(xmpfilter-run)
 "Now I'm using <leader>o for opening files, in normal mode I need to disable
 " the default thing for new tabs
 nmap <leader>t <ESC>
+
+" ,% copy filename to clipboard
+nmap <Leader>% :let<Space>@*=@%<CR>
 
 " GO
 Plugin 'fatih/vim-go'
@@ -138,10 +146,32 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
-
 Plugin 'rizzatti/dash.vim' "Dash documentation lookup service
 
+Plugin 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop
+
+Plugin 'elixir-lang/vim-elixir'
+
 call vundle#end()            " required by Vundle
+
+"ALE Configuration
+" call ale#linter#Define('ruby', {
+" \   'name': 'be-rubocop',
+" \   'executable': 'rubocop',
+" \   'command': 'bundle exec rubocop --format emacs --stdin _',
+" \   'callback': 'ale_linters#ruby#rubocop#Handle',
+" \})
+
+" let g:ale_linters = {'ruby': ['be-rubocop']}
+
+"Airline Configuration
+let g:airline_powerline_fonts = 1
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = ''
+call airline#parts#define_function('ALE', 'ALEGetStatusLine')
+call airline#parts#define_condition('ALE', 'exists("*ALEGetStatusLine")')
+let g:airline_section_error = airline#section#create_right(['ALE'])
 
 "required for vim-textobj-rubyblock
 runtime macros/matchit.vim
@@ -164,6 +194,7 @@ if &diff
   colorscheme solarized
 endif
 
+" set termguicolors "in vim8
 set background=dark
 highlight SignColumn ctermbg=234
 highlight LineNr ctermbg=234
@@ -189,7 +220,7 @@ set cursorline
 set nobackup "no backup files
 set nowritebackup "only in case you don't want a backup file while editing
 set noswapfile "no swap files
-set synmaxcol=80 "only do syntax highlighting up to 200 chars on long lines
+set synmaxcol=120 "only do syntax highlighting up to 120 chars on long lines
 
 set clipboard=unnamed "use system keyboard
 
@@ -234,6 +265,9 @@ inoremap ;a <Esc>
 
 " tagbar
 map <leader>/ :TagbarToggle<CR>
+
+" copy current file path to clipboard
+map <leader>@ :let @+ = expand("%:p")<CR>
 
 " K inserts newline under cursor in normal mode
 nnoremap K i<CR><Esc>
@@ -285,8 +319,8 @@ nmap <F6> :IndentLinesToggle<CR>
 
 "map Dash lookup of word under cursor to ,d
 nmap <silent> <leader>d <Plug>DashSearch
-
 "CtrlP stuff
+" let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 let g:path_to_matcher = "/usr/local/bin/matcher"
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard']
 " map <leader>t :CtrlP<cr>
@@ -343,3 +377,4 @@ function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
 endfunction
 
 iabbr bpry require'pry-byebug';binding.pry
+iabbr xxx puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'

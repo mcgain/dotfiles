@@ -4,14 +4,16 @@
 #             #
 ###############
 
+alias rails5test="DISABLE_SPRING=1 RAILS_NEXT=1 FULL_BACKTRACE=1 bundle exec ruby -Itest "
+alias railstest="DISABLE_SPRING=1 FULL_BACKTRACE=1 bundle exec ruby -Itest "
+
+alias t5=rails5test
+alias t=railstest
 
 function dev_to_development_version() {
   __sourced_path="/Users/richardmcgain/src/dev/dev.sh"
 }
 
-
-alias v="cd ~/src/vagrant; vagrant ssh; "
-alias vu="cd ~/src/vagrant; vagrant up; "
 
 alias c=clear
 alias vi=vim
@@ -30,13 +32,16 @@ alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f
 
 alias babs='babushka'
 
+alias lc="/opt/rubies/2.3.1/bin/ruby /Users/richardmcgain/.gem/ruby/2.3.1/bin/colorls"
+
+
 #dev aliases
 alias d='dev'
 alias dc='dev cd'
 # alias du='dev up' #conflicts with (d)isk(u)sage du
 alias dd='dev down'
 
-alias knife='cd ~/.chef && bundle exec knife && cd -'
+# alias knife='cd ~/.chef && bundle exec knife && cd -'
 
 #find and replace in a directory
 # far /usr/bin /foo/bar/
@@ -152,14 +157,14 @@ alias cdquality='cd ~/Code/Ruby/quality_bot'
 
 alias explore='xdg-open .'
 
-###############
-#             #
-# PERMISSIONS #
-#             #
-###############
+#############################
+#                           #
+# PERMISSIONS AND PROCESSES #
+#                           #
+#############################
 
 alias make_executable='chmod 755'
-
+alias process_listening_on_port='lsof -wni tcp:$1'
 
 ###############
 #             #
@@ -170,9 +175,11 @@ alias make_executable='chmod 755'
 alias g=git
 alias gs='git status'
 alias gc='git commit'
-alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gb='git branch'
+alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gl="git log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gb='git freshness'
 alias gd='git diff --color-words'
+alias gdom='git diff --color-words origin/master'
 alias gga='git ls-files -dmo --exclude-standard | grep $* | xargs -r git add'
 alias gco='git checkout'
 alias gnb='git checkout -b'
@@ -195,6 +202,7 @@ alias gpc="git_push_current_branch"
 alias grlm="git_rebase_onto_latest_master"
 alias gdmb="diff_merge_base"
 alias gcp="git cherry-pick"
+alias gam="git commit --amend -a --no-edit"
 
 function gsq() {
   git rebase -i `git merge-base HEAD master`
@@ -205,16 +213,24 @@ function current_branch() {
 }
 
 function git_rebase_onto_latest_master() {
-  temp_current_branch= current_branch
+  temp_current_branch=$(current_branch)
   git fetch origin
   git branch -f master origin/master
-  git checkout $temp_current_branch
+  git checkout "$temp_current_branch"
   git rebase master
 }
 
 function git_push_current_branch() {
-#don't allow force push of master
-  git push -u origin $1`current_branch`
+  local_current_branch=$( current_branch )
+  if [ "$local_current_branch" == "master" ]; then
+    if [ "$1" == "+" ]; then
+      if [ "$2" == "--force-no-really-i-mean-it" ]; then
+        echo "Don't force push master, you idiot"
+        return
+      fi
+    fi
+  fi
+  git push -u origin "$1$local_current_branch"
 }
 
 function ssh_to_guest() {
@@ -264,3 +280,12 @@ alias hrc-prod='heroku run console --app kutotoca'
 alias test='be spring testunit'
 alias tunnel_to_vagrant='ssh -N -L $1:localhost:$1 vagrant@192.168.211.38'
 alias crusader_kings_saves="cd /Users/richardmcgain/Documents/Paradox\ Interactive/Crusader\ Kings\ II/save\ games"
+
+######################
+#                    #
+# VERIFY AWS KEYPAIR #
+#                    #
+######################
+
+alias aws_fingerprint_local='openssl pkcs8 -in ~/.ssh/richard2.pem -nocrypt -topk8 -outform DER | openssl sha1 -c'
+alias aws_fingerprint_remote='aws ec2 describe-key-pairs --key-name richard2'

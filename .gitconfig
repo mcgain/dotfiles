@@ -29,6 +29,7 @@
 
 [alias]
 	ctags = !.git/hooks/ctags
+  freshness = "!f() { git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)' | column -s '|' -t; }; f"
 
 [mergetool]
   keepBackup = false
@@ -46,3 +47,4 @@
 [diff]
   colorwords = true
   compactionHeuristic = true
+	indentHeuristic = true

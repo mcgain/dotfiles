@@ -112,7 +112,7 @@ function colors {
   local WHITEBOLD="\[\033[1;37m\]"
 }
 
-export PS1='\[\e[00;33m\]$am_i_vagrant\[\e[0m\]\[\e[00;31m\]\W\[\033[0;37m\]|\[\033[0;32m\]$(parse_git_branch)\[\e[0m\]: '
+export PS1='\[\033[0;35m\]$(printf '%.0s-' $(seq 1 $(tput cols)))\n\[\e[00;33m\]$am_i_vagrant\[\e[0m\]\[\e[00;31m\]\W\[\033[0;37m\]|\[\033[0;32m\]$(parse_git_branch)\[\e[0m\]: '
 
 
 # some more ls aliases
@@ -187,15 +187,20 @@ export PRY=1 #for shopify
 shopt -s dotglob
 for file in  ~/.bash/*
 do
-  source $file
+  source "$file"
 done
 shopt -u dotglob
-
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-source /etc/profile.d/chruby.sh
 
 export NVM_DIR="/home/vagrant/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 chruby 2.2.3
+
+export PATH="$HOME/.yarn/bin:$PATH"
+
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export WORKON_HOME=~/.virtualenvs
+source $(brew --prefix)/bin/virtualenvwrapper.sh
+
+#completion for kubectl
+source <(kubectl completion bash)
