@@ -215,3 +215,6 @@ source $(brew --prefix)/bin/virtualenvwrapper.sh
 
 #completion for kubectl
 source <(kubectl completion bash)
+
+
+. /Users/richardmcgain/src/torch/install/bin/torch-activate

@@ -193,6 +193,7 @@ runtime macros/matchit.vim
 " Autoload this file so I don't have to reload when tweaking
 augroup reload_vimrc " {
   autocmd!
+  autocmd BufWritePost ~/.vimrc source ~/.vimrc
   autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
 
@@ -212,11 +213,6 @@ endif
 set background=dark
 highlight SignColumn ctermbg=234
 highlight LineNr ctermbg=234
-
-"When this isn't here, the left gutter will be grey instead of black when
-"something is wrong.
-" I seem to have fixed the problem, but I will leave this here for posterity
-" highlight clear SignColumn
 
 set tabstop=2
 set expandtab
