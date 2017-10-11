@@ -29,7 +29,21 @@ call vundle#begin()
 "  " required!
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'kien/ctrlp.vim'
+" This needs to be before all my <leader> mappings
+let mapleader=","
+
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+
+" Find the string under the cursor accross files in project, using fzf and rg
+set grepprg=rg\ --vimgrep
+command! -bang -nargs=* RipGrepFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+nnoremap <leader>p :RipGrepFind <c-r><c-w><cr>
+
+" Find all files in all non-dot directories starting in the working directory.
+" Fuzzy select one of those. Open the selected file with :e.
+nnoremap <leader>o :Files<cr>
+
 Plugin 'nixprime/cpsm'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'sickill/vim-monokai'
@@ -250,8 +264,6 @@ imap <tab> g:SuperTabDefaultCompletionType
 "      LEADER KEYS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let mapleader=","
-
 "1.8 to 1.9 Hash
 nnoremap <Leader>; :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
 
@@ -319,62 +331,7 @@ nmap <F6> :IndentLinesToggle<CR>
 
 "map Dash lookup of word under cursor to ,d
 nmap <silent> <leader>d <Plug>DashSearch
-"CtrlP stuff
-" let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-let g:path_to_matcher = "/usr/local/bin/matcher"
-let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard']
-" map <leader>t :CtrlP<cr>
-let g:ctrlp_match_func = { 'match': 'GoodMatch' }
-let g:ctrlp_use_caching = 0
 
-" Run a given vim command on the results of fuzzy selecting from a given shell
-" command. See usage below.
-function! SelectaCommand(choice_command, selecta_args, vim_command)
-  try
-    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-  catch /Vim:Interrupt/
-    " Swallow the ^C so that the redraw below happens; otherwise there will be
-    " leftovers from selecta on the screen
-    redraw!
-    return
-  endtry
-  redraw!
-  exec a:vim_command . " " . selection
-endfunction
-
-" Find all files in all non-dot directories starting in the working directory.
-" Fuzzy select one of those. Open the selected file with :e.
-" nnoremap <leader>o :call SelectaCommand("find * -type f", "", ":e")<cr>
-nnoremap <leader>o :CtrlP<cr>
-
-function! SelectaBuffer()
-  let buffers = map(range(1, bufnr("$")), 'bufname(bufnr(v:val))')
-  call SelectaCommand('echo "' . join(buffers, "\n") . '"', "", ":b")
-endfunction
-
-" Fuzzy select a buffer. Open the selected buffer with :b.
-" nnoremap <leader>b :call SelectaBuffer()<cr>
-
-function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
-  " Create a cache file if not yet exists
-  let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
-  if !( filereadable(cachefile) && a:items == readfile(cachefile) )
-    call writefile(a:items, cachefile)
-  endif
-  if !filereadable(cachefile)
-    return []
-  endif
-
-  " a:mmode is currently ignored. In the future, we should probably do
-  " something about that. the matcher behaves like "full-line".
-  let cmd = g:path_to_matcher.' --limit '.a:limit.' --manifest '.cachefile.' '
-  if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
-    let cmd = cmd.'--no-dotfiles '
-  endif
-  let cmd = cmd.a:str
-
-  return split(system(cmd), "\n")
-endfunction
 
 iabbr bpry require'pry-byebug';binding.pry
 iabbr xxx puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
