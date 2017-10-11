@@ -205,7 +205,7 @@ shopt -u dotglob
 export NVM_DIR="/home/vagrant/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-chruby 2.2.3
+chruby 2.3.3
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
