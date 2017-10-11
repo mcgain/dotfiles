@@ -177,7 +177,7 @@ alias gs='git status'
 alias gc='git commit'
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gl="git log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gb='git freshness'
+alias gb='branch_freshness'
 alias gd='git diff --color-words'
 alias gdom='git diff --color-words origin/master'
 alias gga='git ls-files -dmo --exclude-standard | grep $* | xargs -r git add'
@@ -203,6 +203,18 @@ alias grlm="git_rebase_onto_latest_master"
 alias gdmb="diff_merge_base"
 alias gcp="git cherry-pick"
 alias gam="git commit --amend -a --no-edit"
+
+function branch_freshness() {
+  if [ "$#" -eq 0 ]
+  then
+    git for-each-ref \
+      --sort=-committerdate refs/heads/ \
+      --format='%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)' \
+      | column -s '|' -t
+    return
+  fi
+  git branch $@
+}
 
 function gsq() {
   git rebase -i `git merge-base HEAD master`
