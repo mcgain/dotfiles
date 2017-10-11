@@ -267,7 +267,7 @@ function hob() {
 
 function diff_merge_base() {
   base=$(git merge-base origin/master `current_branch`)
-    git diff --color-words $base
+  git diff --color-words $base
 }
 
 ######################
