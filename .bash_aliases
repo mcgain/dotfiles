@@ -16,7 +16,7 @@ function dev_to_development_version() {
 
 
 alias c=clear
-alias vi=vim
+alias vi=nvim
 alias todo=todo2
 alias reboot='sudo shutdown -r now'
 alias far="ag -l $1 | xargs sed -i 's/$1/$2/'"
