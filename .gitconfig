@@ -24,9 +24,6 @@
 [push]
 	default = matching
 
-[init]
-	templatedir = ~/.git_template
-
 [alias]
 	ctags = !.git/hooks/ctags
 

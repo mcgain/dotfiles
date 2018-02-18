@@ -205,16 +205,13 @@ shopt -u dotglob
 export NVM_DIR="/home/vagrant/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-chruby 2.3.3
+chruby 2.4.2
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export WORKON_HOME=~/.virtualenvs
-source $(brew --prefix)/bin/virtualenvwrapper.sh
-
 #completion for kubectl
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
 source <(kubectl completion bash)
-
 
 . /Users/richardmcgain/src/torch/install/bin/torch-activate

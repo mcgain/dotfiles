@@ -4,16 +4,9 @@
 #             #
 ###############
 
-alias rails5test="DISABLE_SPRING=1 RAILS_NEXT=1 FULL_BACKTRACE=1 bundle exec ruby -Itest "
-alias railstest="DISABLE_SPRING=1 FULL_BACKTRACE=1 bundle exec ruby -Itest "
-
-alias t5=rails5test
-alias t=railstest
-
 function dev_to_development_version() {
   __sourced_path="/Users/richardmcgain/src/dev/dev.sh"
 }
-
 
 alias c=clear
 alias vi=nvim
@@ -34,7 +27,6 @@ alias babs='babushka'
 
 alias lc="/opt/rubies/2.3.1/bin/ruby /Users/richardmcgain/.gem/ruby/2.3.1/bin/colorls"
 
-
 #dev aliases
 alias d='dev'
 alias dc='dev cd'
@@ -45,7 +37,10 @@ alias dd='dev down'
 
 #find and replace in a directory
 # far /usr/bin /foo/bar/
-function far() { find "$1" -type f | xargs perl -pi -e "s$2g"; }
+# function far() { find "$1" -type f | xargs perl -pi -e "s$2g"; }
+alias far='codemod'
+
+alias weather='curl wttr.in/Melbourne'
 
 alias note='~/Projects/notes/notes.sh'
 function resource() {

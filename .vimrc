@@ -18,22 +18,28 @@
 "
 " :help search
 " :h offset
-
 set nocompatible
-filetype off " required for vundle!
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" let Vundle manage Vundle
-"  " required!
-Plugin 'gmarik/Vundle.vim'
+" Autoload this file so I don't have to reload when tweaking
+augroup reload_vimrc " {
+  autocmd!
+  autocmd BufWritePost ~/.vimrc source ~/.vimrc
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
+
+call plug#begin('~/.vim/bundle')
 
 " This needs to be before all my <leader> mappings
 let mapleader=","
 
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Find the string under the cursor accross files in project, using fzf and rg
 set grepprg=rg\ --vimgrep
@@ -44,66 +50,66 @@ nnoremap <leader>p :RipGrepFind <c-r><c-w><cr>
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>o :Files<cr>
 
-Plugin 'nixprime/cpsm'
-Plugin 'altercation/vim-colors-solarized.git'
-Plugin 'sickill/vim-monokai'
-Plugin 'ervandew/supertab'
-Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'rking/ag.vim'
-Plugin 'mattn/webapi-vim'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'dockyard/vim-easydir'
-Plugin 'croaker/mustang-vim'
-Plugin 'tommcdo/vim-exchange' "Exchange two regions of text with cx
-Plugin 'Yggdroot/indentLine' "Thin vertical lines on indents
+Plug 'nixprime/cpsm'
+Plug 'altercation/vim-colors-solarized.git'
+Plug 'sickill/vim-monokai'
+Plug 'ervandew/supertab'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'kchmck/vim-coffee-script'
+Plug 'rking/ag.vim'
+Plug 'mattn/webapi-vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'dockyard/vim-easydir'
+Plug 'croaker/mustang-vim'
+Plug 'tommcdo/vim-exchange' "Exchange two regions of text with cx
+Plug 'Yggdroot/indentLine' "Thin vertical lines on indents
 
-Plugin 'terryma/vim-multiple-cursors' "
+Plug 'terryma/vim-multiple-cursors' "
 
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 " Complete github usernames with C-x C-o
-Plugin 'tpope/vim-rhubarb'
-Plugin 'mmozuras/vim-github-comment'
+Plug 'tpope/vim-rhubarb'
+Plug 'mmozuras/vim-github-comment'
 
 
 " custom text objects
-Plugin 'kana/vim-textobj-user.git'
-Plugin 'kana/vim-textobj-entire.git'
-Plugin 'kana/vim-textobj-indent.git'
-Plugin 'kana/vim-textobj-syntax.git'
-Plugin 'kana/vim-textobj-line.git'
-Plugin 'nelstrom/vim-textobj-rubyblock.git'
-Plugin 'wellle/targets.vim.git' "so many more text objects
-Plugin 'michaeljsmith/vim-indent-object.git' "does this do the same thing as
+Plug 'kana/vim-textobj-user.git'
+Plug 'kana/vim-textobj-entire.git'
+Plug 'kana/vim-textobj-indent.git'
+Plug 'kana/vim-textobj-syntax.git'
+Plug 'kana/vim-textobj-line.git'
+Plug 'nelstrom/vim-textobj-rubyblock.git'
+Plug 'wellle/targets.vim.git' "so many more text objects
+Plug 'michaeljsmith/vim-indent-object.git' "does this do the same thing as
 " the indent thing above
 
-Plugin 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'
 
 "Some new ones from a tope talk
-Plugin 'tpope/vim-endwise.git'
-Plugin 'tpope/vim-abolish.git'
+Plug 'tpope/vim-endwise.git'
+Plug 'tpope/vim-abolish.git'
 
 "unixy filesystem stuff like proper file renames using :Move,
 ":Mkdir, :Chmod, :Remove, :Rename, :SudoWrite
-Plugin 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 
 " ruby
-Plugin 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby'
 let g:ruby_indent_assignment_style = 'variable'
 
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-rake.git'
-Plugin 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rake.git'
+Plug 'tpope/vim-rails'
 
 autocmd FileType ruby setlocal iskeyword+=?,! " include ? and ! in ruby words
 
 "evaluate ruby inline
-Plugin 't9md/vim-ruby-xmpfilter'
+Plug 't9md/vim-ruby-xmpfilter'
 autocmd FileType ruby nmap <buffer> <leader>m <Plug>(xmpfilter-mark)
 autocmd FileType ruby xmap <buffer> <leader>m <Plug>(xmpfilter-mark)
 autocmd FileType ruby imap <buffer> <leader>m <Plug>(xmpfilter-mark)
@@ -119,7 +125,7 @@ nmap <leader>t <ESC>
 nmap <Leader>% :let<Space>@*=@%<CR>
 
 " GO
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -147,26 +153,27 @@ au FileType go nmap <Leader>s <Plug>(go-implements)
 set tags=./tags;/
 
 " Lua
-Plugin 'vim-scripts/lua.vim'
-Plugin 'vim-scripts/vim-misc'
+Plug 'vim-scripts/lua.vim'
+Plug 'vim-scripts/vim-misc'
 "dispatch is a test runner
 " Bundle 'tpope/vim-dispatch.git'
 
 "Rust
-Plugin 'wting/rust.vim'
+Plug 'wting/rust.vim'
 
 "Markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
-Plugin 'rizzatti/dash.vim' "Dash documentation lookup service
+Plug 'rizzatti/dash.vim' "Dash documentation lookup service
 
-Plugin 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop
+Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop
 
-Plugin 'elixir-lang/vim-elixir'
+Plug 'elixir-lang/vim-elixir'
 
-call vundle#end()            " required by Vundle
+Plug 'bogado/file-line'
+call plug#end()
 
 "ALE Configuration
 " call ale#linter#Define('ruby', {
@@ -190,15 +197,7 @@ let g:airline_section_error = airline#section#create_right(['ALE'])
 "required for vim-textobj-rubyblock
 runtime macros/matchit.vim
 
-" Autoload this file so I don't have to reload when tweaking
-augroup reload_vimrc " {
-  autocmd!
-  autocmd BufWritePost ~/.vimrc source ~/.vimrc
-  autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END " }
 
-
-syntax enable
 "force *.md to markdown instead of modula-2
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
@@ -316,6 +315,9 @@ let g:github_user = 'mcgain'
 nmap <leader>n <Plug>GitGutterNextHunk
 nmap <leader>N <Plug>GitGutterPrevHunk
 
+"Hopefully makes ESC work to get out of terminal mode
+tnoremap <Esc> <C-\><C-n>
+
 "highlight lines that are too long
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%121v.\+/
@@ -331,3 +333,12 @@ nmap <silent> <leader>d <Plug>DashSearch
 
 iabbr bpry require'pry-byebug';binding.pry
 iabbr xxx puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+
+"make everything writable when I want to write it
+function! g:ChmodOnWrite()
+  if v:cmdbang
+    silent !chmod u+w %
+  endif
+endfunction
+
+autocmd BufWrite * call g:ChmodOnWrite()
