@@ -51,7 +51,7 @@ nnoremap <leader>p :RipGrepFind <c-r><c-w><cr>
 nnoremap <leader>o :Files<cr>
 
 Plug 'nixprime/cpsm'
-Plug 'altercation/vim-colors-solarized.git'
+Plug 'altercation/vim-colors-solarized'
 Plug 'sickill/vim-monokai'
 Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
@@ -78,21 +78,21 @@ Plug 'mmozuras/vim-github-comment'
 
 
 " custom text objects
-Plug 'kana/vim-textobj-user.git'
-Plug 'kana/vim-textobj-entire.git'
-Plug 'kana/vim-textobj-indent.git'
-Plug 'kana/vim-textobj-syntax.git'
-Plug 'kana/vim-textobj-line.git'
-Plug 'nelstrom/vim-textobj-rubyblock.git'
-Plug 'wellle/targets.vim.git' "so many more text objects
-Plug 'michaeljsmith/vim-indent-object.git' "does this do the same thing as
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-syntax'
+Plug 'kana/vim-textobj-line'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'wellle/targets.vim' "so many more text objects
+Plug 'michaeljsmith/vim-indent-object' "does this do the same thing as
 " the indent thing above
 
 Plug 'justinmk/vim-sneak'
 
 "Some new ones from a tope talk
-Plug 'tpope/vim-endwise.git'
-Plug 'tpope/vim-abolish.git'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-abolish'
 
 "unixy filesystem stuff like proper file renames using :Move,
 ":Mkdir, :Chmod, :Remove, :Rename, :SudoWrite
@@ -103,7 +103,7 @@ Plug 'vim-ruby/vim-ruby'
 let g:ruby_indent_assignment_style = 'variable'
 
 Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-rake.git'
+Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
 
 autocmd FileType ruby setlocal iskeyword+=?,! " include ? and ! in ruby words
@@ -156,7 +156,7 @@ set tags=./tags;/
 Plug 'vim-scripts/lua.vim'
 Plug 'vim-scripts/vim-misc'
 "dispatch is a test runner
-" Bundle 'tpope/vim-dispatch.git'
+" Bundle 'tpope/vim-dispatch'
 
 "Rust
 Plug 'wting/rust.vim'

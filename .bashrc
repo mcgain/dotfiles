@@ -215,3 +215,5 @@ source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.
 source <(kubectl completion bash)
 
 . /Users/richardmcgain/src/torch/install/bin/torch-activate
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

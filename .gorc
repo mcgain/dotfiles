@@ -1,0 +1,4 @@
+export GOPATH=~/src
+export GOROOT=~/.dev/go/1.9/bin/go
+export GOBIN=~/src/gobin
+export PATH=$GOROOT/bin:$GOBIN:$PATH
