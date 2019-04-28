@@ -57,6 +57,7 @@ Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'vim-scripts/ReplaceWithRegister' "{register, defaults to "}"gr{motion}
 Plug 'kchmck/vim-coffee-script'
 Plug 'rking/ag.vim'
 Plug 'mattn/webapi-vim'
@@ -65,9 +66,6 @@ Plug 'dockyard/vim-easydir'
 Plug 'croaker/mustang-vim'
 Plug 'tommcdo/vim-exchange' "Exchange two regions of text with cx
 Plug 'Yggdroot/indentLine' "Thin vertical lines on indents
-
-Plug 'terryma/vim-multiple-cursors' "
-
 Plug 'bling/vim-airline'
 
 Plug 'airblade/vim-gitgutter'
@@ -117,6 +115,9 @@ autocmd FileType ruby imap <buffer> <leader>m <Plug>(xmpfilter-mark)
 autocmd FileType ruby nmap <buffer> <leader>r <Plug>(xmpfilter-run)
 autocmd FileType ruby xmap <buffer> <leader>r <Plug>(xmpfilter-run)
 autocmd FileType ruby imap <buffer> <leader>r <Plug>(xmpfilter-run)
+
+Plug 'rhysd/vim-crystal'
+
 "Now I'm using <leader>o for opening files, in normal mode I need to disable
 " the default thing for new tabs
 nmap <leader>t <ESC>
@@ -173,6 +174,28 @@ Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop
 Plug 'elixir-lang/vim-elixir'
 
 Plug 'bogado/file-line'
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" Tell the language client to use the default IP and port
+" that Solargraph runs on
+let g:LanguageClient_serverCommands = {
+    \ 'ruby': ['tcp://localhost:7658']
+    \ }
+
+" Don't send a stop signal to the server when exiting vim.
+" This is optional, but I don't like having to restart Solargraph
+" every time I restart vim.
+let g:LanguageClient_autoStop = 0
+
+" Configure ruby omni-completion to use the language client:
+autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
+
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "dunno what this is for the language client needs it i think
 call plug#end()
 
 "ALE Configuration
@@ -208,7 +231,7 @@ if &diff
   colorscheme solarized
 endif
 
-" set termguicolors "in vim8
+set termguicolors "in vim8
 set background=dark
 highlight SignColumn ctermbg=234
 highlight LineNr ctermbg=234
@@ -330,6 +353,7 @@ nmap <F6> :IndentLinesToggle<CR>
 "map Dash lookup of word under cursor to ,d
 nmap <silent> <leader>d <Plug>DashSearch
 
+nmap <leader>z :let @+ = expand("%")<CR>
 
 iabbr bpry require'pry-byebug';binding.pry
 iabbr xxx puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'

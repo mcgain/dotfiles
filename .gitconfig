@@ -9,6 +9,7 @@
   protocol = https
 
 [credential]
+	helper = osxkeychain
 
 [core]
 	excludesfile = /Users/richardmcgain/.gitignore-global
@@ -44,3 +45,6 @@
   colorwords = true
   compactionHeuristic = true
 	indentHeuristic = true
+	algorithm = patience
+[protocol]
+	version = 2

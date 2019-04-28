@@ -1,3 +1,4 @@
+echo "inside bashrc"
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -33,7 +34,7 @@ shopt -s histappend
 #export LANG=C
 
 #EDITOR
-EDITOR=vim; export EDITOR
+EDITOR=vi; export EDITOR
 
 #every time bash shows a prompt, add previous command to master history, then restore from master history
 export PROMPT_COMMAND="history -a; history -n"
@@ -209,11 +210,20 @@ chruby 2.4.2
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
+#disable spring
+export DISABLE_SPRING=1
+
 #completion for kubectl
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
 source <(kubectl completion bash)
 
 . /Users/richardmcgain/src/torch/install/bin/torch-activate
+
+for file in /Users/richardmcgain/src/cloudplatform/workflow-utils/*.bash; do source ${file}; done
+
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}$HOME/.kube/config:$HOME/.kube/config.shopify.cloudplatform
+source ~/.bash_completion/alacritty
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
