@@ -12,14 +12,14 @@ alias c=clear
 alias vi=nvim
 alias todo=todo2
 alias reboot='sudo shutdown -r now'
-alias far="ag -l $1 | xargs sed -i 's/$1/$2/'"
 alias f="find -n"
 alias ack=ag
 alias cds='cd ~/src/'
 alias cdss='cd ~/src/shopify'
 alias cdsg='cd ~/src/go/src'
 alias blog='cd /Users/richardmcgain/OneDrive/Blog\ Posts'
-alias cdrg='cd ~/src/go/src/railgun'
+alias re="rg -g '!/bundle/**' -g '!/test/**' -g '!/doc/**'"
+alias k="kubectl"
 
 alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f 1 -d ' ' | xargs kill -9"
 
@@ -175,8 +175,9 @@ alias gl="git log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %
 alias gb='branch_freshness'
 alias gd='git diff --color-words'
 alias gdom='git diff --color-words origin/master'
-alias gga='git ls-files -dmo --exclude-standard | grep $* | xargs -r git add'
+alias gga='git ls-files -dmo --exclude-standard | grep "$*" | xargs -r git add'
 alias gco='git checkout'
+alias fco='git checkout $(git branch | fzf)'
 alias gnb='git checkout -b'
 alias gp='git pull'
 alias gpa='git pull develop; git fetch devheroku'

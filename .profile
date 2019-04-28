@@ -8,6 +8,8 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+echo "IN the profile"
+
 if [ -e "$HOME/.go_conf" ] ; then
   source "$HOME/.go_conf"
 fi
@@ -25,10 +27,4 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 export PATH="$HOME/.cargo/bin:$PATH"
-
-
-. /Users/richardmcgain/src/torch/install/bin/torch-activate
