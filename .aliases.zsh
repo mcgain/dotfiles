@@ -11,6 +11,16 @@ alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f
 alias vi="nvim"
 alias vim="nvim"
 
+# open files from the last commit
+function vc() {
+  vi -O `git show --pretty="format:" --name-only "$@" | tr -s "\\n" " "`;
+}
+
+# open files from git diff
+function vd() {
+  vi -O `git ls-files --modified --exclude-standard | tr -s "\\n" " "`;
+}
+
 function dalek(){
   echo ""
   echo "                      $1, you will be EXTERMINATED!     "
@@ -58,6 +68,7 @@ alias rc='bin/rails console'
 #             #
 ###############
 
+alias g='git'
 alias gs='git status'
 alias gc='git commit'
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -111,6 +122,11 @@ function git_rebase_onto_latest_master() {
   git branch -f master origin/master
   git checkout "$temp_current_branch"
   git rebase master
+}
+
+function diff_merge_base() {
+  base=$(git merge-base origin/master `current_branch`)
+  git diff --color-words $base
 }
 
 function git_push_current_branch() {

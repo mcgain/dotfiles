@@ -38,6 +38,7 @@ call plug#begin('~/.vim/bundle')
 " This needs to be before all my <leader> mappings
 let mapleader=","
 
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -53,13 +54,11 @@ nnoremap <leader>o :Files<cr>
 Plug 'nixprime/cpsm'
 Plug 'altercation/vim-colors-solarized'
 Plug 'sickill/vim-monokai'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/ReplaceWithRegister' "{register, defaults to "}"gr{motion}
-Plug 'kchmck/vim-coffee-script'
-Plug 'rking/ag.vim'
 Plug 'mattn/webapi-vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'dockyard/vim-easydir'
@@ -70,8 +69,6 @@ Plug 'bling/vim-airline'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-" Complete github usernames with C-x C-o
-Plug 'tpope/vim-rhubarb'
 Plug 'mmozuras/vim-github-comment'
 
 
@@ -104,6 +101,9 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
 
+" change {} to do end with gS and gJ
+Plug 'AndrewRadev/splitjoin.vim'
+
 autocmd FileType ruby setlocal iskeyword+=?,! " include ? and ! in ruby words
 
 "evaluate ruby inline
@@ -115,8 +115,6 @@ autocmd FileType ruby imap <buffer> <leader>m <Plug>(xmpfilter-mark)
 autocmd FileType ruby nmap <buffer> <leader>r <Plug>(xmpfilter-run)
 autocmd FileType ruby xmap <buffer> <leader>r <Plug>(xmpfilter-run)
 autocmd FileType ruby imap <buffer> <leader>r <Plug>(xmpfilter-run)
-
-Plug 'rhysd/vim-crystal'
 
 "Now I'm using <leader>o for opening files, in normal mode I need to disable
 " the default thing for new tabs
@@ -160,6 +158,8 @@ Plug 'vim-scripts/vim-misc'
 " Bundle 'tpope/vim-dispatch'
 
 "Rust
+let g:rustfmt_command='cargo fmt'
+let g:rustfmt_autosave = 1
 Plug 'wting/rust.vim'
 
 "Markdown
@@ -167,46 +167,20 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
-Plug 'rizzatti/dash.vim' "Dash documentation lookup service
-
 Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop
 
 Plug 'elixir-lang/vim-elixir'
 
 Plug 'bogado/file-line'
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
-" Tell the language client to use the default IP and port
-" that Solargraph runs on
-let g:LanguageClient_serverCommands = {
-    \ 'ruby': ['tcp://localhost:7658']
-    \ }
-
-" Don't send a stop signal to the server when exiting vim.
-" This is optional, but I don't like having to restart Solargraph
-" every time I restart vim.
-let g:LanguageClient_autoStop = 0
-
-" Configure ruby omni-completion to use the language client:
-autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
-
-
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "dunno what this is for the language client needs it i think
+
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+
 call plug#end()
 
-"ALE Configuration
-" call ale#linter#Define('ruby', {
-" \   'name': 'be-rubocop',
-" \   'executable': 'rubocop',
-" \   'command': 'bundle exec rubocop --format emacs --stdin _',
-" \   'callback': 'ale_linters#ruby#rubocop#Handle',
-" \})
-
-" let g:ale_linters = {'ruby': ['be-rubocop']}
+call deoplete#enable()
+call deoplete#custom#var('tabnine', { 'line_limit': 500, 'max_num_results': 20 })
 
 "Airline Configuration
 let g:airline_powerline_fonts = 1
@@ -276,7 +250,7 @@ inoremap fj <esc>:w<cr>
 nnoremap fj :w<cr>
 
 " supertab
-imap <tab> g:SuperTabDefaultCompletionType
+" imap <tab> g:SuperTabDefaultCompletionType
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "      LEADER KEYS
