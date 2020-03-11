@@ -27,4 +27,4 @@ chruby ruby-2.6
 source ~/.welcome.zsh
 
 source /home/mcgain/.config/broot/launcher/bash/br
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
