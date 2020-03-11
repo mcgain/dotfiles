@@ -1,4 +1,3 @@
-echo "inside bashrc"
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -148,10 +147,6 @@ if [ -f ~/.custom_git_completion ]; then
   . ~/.custom_git_completion
 fi
 
-if [ -f ~/.bash_vagrant ]; then
-  . ~/.bash_vagrant
-fi
-
 if [ -f ~/.gorc ]; then
   . ~/.gorc
 fi
@@ -203,11 +198,6 @@ do
 done
 shopt -u dotglob
 
-export NVM_DIR="/home/vagrant/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-chruby 2.4.2
-
 export PATH="$HOME/.yarn/bin:$PATH"
 
 #disable spring
@@ -227,3 +217,5 @@ export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}$HOME/.kube/config:$HOME/.kube/conf
 source ~/.bash_completion/alacritty
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source /home/mcgain/.config/broot/launcher/bash/br

@@ -324,8 +324,9 @@ let g:indentLine_color_term = 239
 let g:indentLine_char = '|'
 nmap <F6> :IndentLinesToggle<CR>
 
-"map Dash lookup of word under cursor to ,d
-nmap <silent> <leader>d <Plug>DashSearch
+"Doc search with zeal
+Plug 'KabbAmine/zeavim.vim'
+let g:zv_zeal_executable = '/mnt/c/Program Files/Zeal/zeal.exe'
 
 nmap <leader>z :let @+ = expand("%")<CR>
 

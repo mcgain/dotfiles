@@ -10,6 +10,10 @@ alias re="rg -g '!/bundle/**' -g '!/test/**' -g '!/doc/**'"
 alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f 1 -d ' ' | xargs kill -9"
 alias vi="nvim"
 alias vim="nvim"
+alias c="clear"
+
+alias ll='ls -l'
+alias la='ls -a'
 
 # open files from the last commit
 function vc() {
@@ -140,4 +144,10 @@ function git_push_current_branch() {
     fi
   fi
   git push -u origin "$1$local_current_branch"
+}
+
+function clone() {
+  name=$(echo $1 | sed 's/.*\///')
+  git clone git@github.com:$1 ~/src/$name
+  cd ~/src/$name
 }
