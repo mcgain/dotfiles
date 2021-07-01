@@ -230,9 +230,9 @@ function git_rebase_onto_latest_master() {
 
 function git_push_current_branch() {
   local_current_branch=$( current_branch )
-  if [ "$local_current_branch" == "master" ]; then
-    if [ "$1" == "+" ]; then
-      if [ "$2" == "--force-no-really-i-mean-it" ]; then
+  if [[ "$local_current_branch" == "master" ]]; then
+    if [[ "$1" == "+" ]]; then
+      if [[ "$2" == "--force-no-really-i-mean-it" ]]; then
         echo "Don't force push master, you idiot"
         return
       fi

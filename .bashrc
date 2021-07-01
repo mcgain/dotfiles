@@ -33,7 +33,7 @@ shopt -s histappend
 #export LANG=C
 
 #EDITOR
-EDITOR=vi; export EDITOR
+EDITOR=nvim; export EDITOR
 
 #every time bash shows a prompt, add previous command to master history, then restore from master history
 export PROMPT_COMMAND="history -a; history -n"

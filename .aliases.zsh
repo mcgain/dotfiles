@@ -6,11 +6,13 @@
 
 alias k='kubectl'
 alias cds='cd ~/src/'
-alias re="rg -g '!/bundle/**' -g '!/test/**' -g '!/doc/**'"
+alias re="rg -g '!/bundle/**' -g '!/test/**' -g '!/doc/**' -g '!/spec/**'"
 alias kill_ruby="dalek Ruby && ps -e | grep ruby | sed -e 's/^[ \t]*//' | cut -f 1 -d ' ' | xargs kill -9"
 alias vi="nvim"
 alias vim="nvim"
 alias c="clear"
+alias less="less -R"
+alias resource="source ~/.aliases.zsh"
 
 alias ll='ls -l'
 alias la='ls -a'
@@ -58,6 +60,14 @@ alias far='codemod'
 
 ###############
 #             #
+# dotfiles    #
+#             #
+###############
+alias vimrc='nvim ~/.vimrc'
+alias aliases='nvim ~/.aliases.zsh'
+
+###############
+#             #
 # rails       #
 #             #
 ###############
@@ -65,6 +75,7 @@ alias far='codemod'
 alias r='bin/rails'
 alias rs='bin/rails server'
 alias rc='bin/rails console'
+alias bi='bundle install'
 
 ###############
 #             #
@@ -92,7 +103,7 @@ alias gcd='git checkout develop'
 alias grm='git rebase master'
 alias grc='git rebase --continue'
 alias gmt='git mergetool'
-alias gmd='current_git_branch=`current_branch`; git checkout develop; git merge --no-edit $current_git_branch; git branch -d $current_git_branch'
+alias gmd='merge_current_dev_branch'
 alias gcb="git symbolic-ref --short HEAD"
 alias gpc="git_push_current_branch"
 alias grlm="git_rebase_onto_latest_master"
@@ -100,13 +111,27 @@ alias gdmb="diff_merge_base"
 alias gcp="git cherry-pick"
 alias gam="git commit --amend -a --no-edit"
 
+alias opr="open_pull_request"
+
+function fub() {
+  cwd=$(pwd)
+  cd services/fub
+  "$@"
+  cd $cwd
+}
+
+function merge_current_dev_branch() {
+  current_git_branch=`current_branch`;
+  git checkout develop;
+  git merge --no-edit $current_git_branch;
+  git branch -d $current_git_branch
+}
+
 function branch_freshness() {
+  format_str="%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)"
   if [[ "$#" -eq 0 ]]
   then
-    git for-each-ref \
-      --sort=-committerdate refs/heads/ \
-      --format='%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)' \
-      | column -s '|' -t
+    git for-each-ref --sort=-committerdate refs/heads/ --format=$format_str --color | /usr/local/opt/util-linux/bin/column -s '|' -t -c $COLUMNS -T 3
     return
   fi
   git branch $@
@@ -130,7 +155,7 @@ function git_rebase_onto_latest_master() {
 
 function diff_merge_base() {
   base=$(git merge-base origin/master `current_branch`)
-  git diff --color-words $base
+  git diff --color-words $base $@
 }
 
 function git_push_current_branch() {
@@ -150,4 +175,10 @@ function clone() {
   name=$(echo $1 | sed 's/.*\///')
   git clone git@github.com:$1 ~/src/$name
   cd ~/src/$name
+}
+
+function open_pull_request() {
+  branch=$(current_branch);
+  repo=$(git remote get-url --all origin | cut -d':' -f'2')
+  open "http://www.github.com/$repo/compare/$branch?expand=1"
 }

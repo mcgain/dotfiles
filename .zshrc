@@ -2,10 +2,13 @@
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}$HOME/.kube/config:$HOME/.kube/config.shopify.cloudplatform
 fpath=(~/.zsh/plugins/ $fpath)
 
+export EDITOR=nvim
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source ~/.zshoptions.zsh
 source ~/.aliases.zsh
+source ~/.ferocia-specific.zsh
 
 # https://github.com/sindresorhus/pure
 # fpath+=/home/mcgain/.zsh/plugins/pure
@@ -16,15 +19,15 @@ source ~/.aliases.zsh
 
 eval "$(starship init zsh)"
 
-PATH=$PATH:/usr/lib/postgresql/10/bin
+eval "$(nodenv init -)"
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
 
 cd ~ # go home
 
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-chruby ruby-2.6
-
 source ~/.welcome.zsh
 
-source /home/mcgain/.config/broot/launcher/bash/br
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias dotfiles="/usr/bin/git --git-dir=$HOME/src/dotfiles/ --work-tree=$HOME"

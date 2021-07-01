@@ -1,23 +1,4 @@
 "Richard McGain's Dotfiles
-" r :normal = awesome
-" "
-"
-" nmap Q j.
-" nmap Q <nop>
-"
-"
-" :norm or :normal = awesome
-" r :normal = awesome
-"
-" :xnoremap . :norm.<CR>
-"
-" r :normal = awesome
-"
-"
-" /term/e - poition cursor at end of match
-"
-" :help search
-" :h offset
 set nocompatible
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -38,9 +19,13 @@ call plug#begin('~/.vim/bundle')
 " This needs to be before all my <leader> mappings
 let mapleader=","
 
+Plug 'zsugabubus/vim-paperplane' "Shows the context of the file, hopefully
 
+"Fuzzy file finding
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+" let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
 
 " Find the string under the cursor accross files in project, using fzf and rg
 set grepprg=rg\ --vimgrep
@@ -51,10 +36,8 @@ nnoremap <leader>p :RipGrepFind <c-r><c-w><cr>
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>o :Files<cr>
 
-Plug 'nixprime/cpsm'
 Plug 'altercation/vim-colors-solarized'
 Plug 'sickill/vim-monokai'
-" Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -64,13 +47,13 @@ Plug 'tomtom/tcomment_vim'
 Plug 'dockyard/vim-easydir'
 Plug 'croaker/mustang-vim'
 Plug 'tommcdo/vim-exchange' "Exchange two regions of text with cx
-Plug 'Yggdroot/indentLine' "Thin vertical lines on indents
+Plug 'Yggdroot/indentLine' "Thin vertical lines on indents <F6>
 Plug 'bling/vim-airline'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb' " #Github integration for fugitive
 Plug 'mmozuras/vim-github-comment'
-
 
 " custom text objects
 Plug 'kana/vim-textobj-user'
@@ -83,11 +66,14 @@ Plug 'wellle/targets.vim' "so many more text objects
 Plug 'michaeljsmith/vim-indent-object' "does this do the same thing as
 " the indent thing above
 
+"go to two characters with s. sea goes to the next occurence of ea
+" with operators, its used with z, so dtzab deletes to the next occurence of
+" ab
 Plug 'justinmk/vim-sneak'
 
 "Some new ones from a tope talk
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-endwise' "Adds end to defs and ifs and stuff
+Plug 'tpope/vim-abolish' "substitutions for :Subert/di{e,ce}/spinner{,s}/
 
 "unixy filesystem stuff like proper file renames using :Move,
 ":Mkdir, :Chmod, :Remove, :Rename, :SudoWrite
@@ -106,37 +92,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 
 autocmd FileType ruby setlocal iskeyword+=?,! " include ? and ! in ruby words
 
-"evaluate ruby inline
-Plug 't9md/vim-ruby-xmpfilter'
-autocmd FileType ruby nmap <buffer> <leader>m <Plug>(xmpfilter-mark)
-autocmd FileType ruby xmap <buffer> <leader>m <Plug>(xmpfilter-mark)
-autocmd FileType ruby imap <buffer> <leader>m <Plug>(xmpfilter-mark)
-
-autocmd FileType ruby nmap <buffer> <leader>r <Plug>(xmpfilter-run)
-autocmd FileType ruby xmap <buffer> <leader>r <Plug>(xmpfilter-run)
-autocmd FileType ruby imap <buffer> <leader>r <Plug>(xmpfilter-run)
-
-"Now I'm using <leader>o for opening files, in normal mode I need to disable
-" the default thing for new tabs
-nmap <leader>t <ESC>
-
-" ,% copy filename to clipboard
-nmap <Leader>% :let<Space>@*=@%<CR>
-
-" GO
-Plug 'fatih/vim-go'
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_fmt_command = "goimports"
-
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-
 "open current target in split
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
@@ -148,39 +103,48 @@ au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 "list of interfaces implemented by type
 au FileType go nmap <Leader>s <Plug>(go-implements)
 
-"tags
-set tags=./tags;/
-
-" Lua
-Plug 'vim-scripts/lua.vim'
-Plug 'vim-scripts/vim-misc'
-"dispatch is a test runner
-" Bundle 'tpope/vim-dispatch'
-
 "Rust
 let g:rustfmt_command='cargo fmt'
 let g:rustfmt_autosave = 1
 Plug 'wting/rust.vim'
+
+"tags
+set tags=./tags;/
 
 "Markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
-Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop
+" Lua
+Plug 'vim-scripts/lua.vim'
+Plug 'vim-scripts/vim-misc'
+
+"Javascript / Typescript / React
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
+Plug 'ludovicchabant/vim-gutentags' "For ctags
 
 Plug 'elixir-lang/vim-elixir'
 
 Plug 'bogado/file-line'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "dunno what this is for the language client needs it i think
+let g:deoplete#enable_at_startup = 1
 
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-
-call plug#end()
-
-call deoplete#enable()
 call deoplete#custom#var('tabnine', { 'line_limit': 500, 'max_num_results': 20 })
+
+Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop / prettier
+
+let g:ale_fixers = {
+\ 'javascript': ['prettier'],
+\ 'css': ['prettier'],
+\ 'ruby': ['prettier'],
+\}
+let g:ale_linters_explicit = 1 " Disable auto ALE, just do the stuff above
+let g:ale_fix_on_save = 1
 
 "Airline Configuration
 let g:airline_powerline_fonts = 1
@@ -272,6 +236,8 @@ map <leader>/ :TagbarToggle<CR>
 
 " copy current file path to clipboard
 map <leader>@ :let @+ = expand("%:p")<CR>
+" ,% copy filename to clipboard
+nmap <Leader>% :let<Space>@*=@%<CR>
 
 " K inserts newline under cursor in normal mode
 nnoremap K i<CR><Esc>
@@ -341,3 +307,16 @@ function! g:ChmodOnWrite()
 endfunction
 
 autocmd BufWrite * call g:ChmodOnWrite()
+autocmd FileType ruby nmap <buffer> <leader>m <Plug>(xmpfilter-mark)
+autocmd FileType ruby xmap <buffer> <leader>m <Plug>(xmpfilter-mark)
+autocmd FileType ruby imap <buffer> <leader>m <Plug>(xmpfilter-mark)
+
+autocmd FileType ruby nmap <buffer> <leader>r <Plug>(xmpfilter-run)
+autocmd FileType ruby xmap <buffer> <leader>r <Plug>(xmpfilter-run)
+autocmd FileType ruby imap <buffer> <leader>r <Plug>(xmpfilter-run)
+
+"Now I'm using <leader>o for opening files, in normal mode I need to disable
+" the default thing for new tabs
+nmap <leader>t <ESC>
+
+call plug#end()
