@@ -45,7 +45,7 @@ Plug 'vim-scripts/ReplaceWithRegister' "{register, defaults to "}"gr{motion}
 Plug 'mattn/webapi-vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'dockyard/vim-easydir'
-Plug 'croaker/mustang-vim'
+Plug 'croaker/mustang-vim' "colourscheme
 Plug 'tommcdo/vim-exchange' "Exchange two regions of text with cx
 Plug 'Yggdroot/indentLine' "Thin vertical lines on indents <F6>
 Plug 'bling/vim-airline'
@@ -134,7 +134,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "dunno what this i
 let g:deoplete#enable_at_startup = 1
 
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-call deoplete#custom#var('tabnine', { 'line_limit': 500, 'max_num_results': 20 })
 
 Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop / prettier
 
@@ -146,28 +145,12 @@ let g:ale_fixers = {
 let g:ale_linters_explicit = 1 " Disable auto ALE, just do the stuff above
 let g:ale_fix_on_save = 1
 
-"Airline Configuration
-let g:airline_powerline_fonts = 1
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-let g:airline_section_z = ''
-call airline#parts#define_function('ALE', 'ALEGetStatusLine')
-call airline#parts#define_condition('ALE', 'exists("*ALEGetStatusLine")')
-let g:airline_section_error = airline#section#create_right(['ALE'])
-
 "required for vim-textobj-rubyblock
 runtime macros/matchit.vim
 
 
 "force *.md to markdown instead of modula-2
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-colorscheme mustang
-" colorscheme monokai
-if &diff
-  let g:solarized_termcolors=256
-  colorscheme solarized
-endif
 
 set termguicolors "in vim8
 set background=dark
@@ -320,3 +303,22 @@ autocmd FileType ruby imap <buffer> <leader>r <Plug>(xmpfilter-run)
 nmap <leader>t <ESC>
 
 call plug#end()
+
+" this needs to be called after plug#end
+call deoplete#custom#var('tabnine', { 'line_limit': 500, 'max_num_results': 20 })
+
+"Airline Configuration
+" the calls must be after plug#end
+let g:airline_powerline_fonts = 1
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = ''
+call airline#parts#define_function('ALE', 'ALEGetStatusLine')
+call airline#parts#define_condition('ALE', 'exists("*ALEGetStatusLine")')
+let g:airline_section_error = airline#section#create_right(['ALE'])
+
+colorscheme mustang
+if &diff
+  let g:solarized_termcolors=256
+  colorscheme solarized
+endif

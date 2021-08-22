@@ -15,7 +15,6 @@ alias reboot='sudo shutdown -r now'
 alias f="find -n"
 alias ack=ag
 alias cds='cd ~/src/'
-alias cdss='cd ~/src/shopify'
 alias cdsg='cd ~/src/go/src'
 alias blog='cd /Users/richardmcgain/OneDrive/Blog\ Posts'
 alias re="rg -g '!/bundle/**' -g '!/test/**' -g '!/doc/**'"

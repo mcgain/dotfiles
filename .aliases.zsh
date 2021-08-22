@@ -90,7 +90,7 @@ alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d
 alias gl="git log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gb='branch_freshness'
 alias gd='git diff --color-words'
-alias gdom='git diff --color-words origin/master'
+alias gdom='git diff --color-words origin/main'
 alias gga='git ls-files -dmo --exclude-standard | grep "$*" | xargs -r git add'
 alias gco='git checkout'
 alias fco='git checkout $(git branch | fzf)'
@@ -98,15 +98,15 @@ alias gnb='git checkout -b'
 alias gp='git pull'
 alias gpa='git pull develop; git fetch devheroku'
 alias ga='git add'
-alias gcm='git checkout master'
+alias gcm='git checkout main'
 alias gcd='git checkout develop'
-alias grm='git rebase master'
+alias grm='git rebase main'
 alias grc='git rebase --continue'
 alias gmt='git mergetool'
 alias gmd='merge_current_dev_branch'
 alias gcb="git symbolic-ref --short HEAD"
 alias gpc="git_push_current_branch"
-alias grlm="git_rebase_onto_latest_master"
+alias grlm="git_rebase_onto_latest_main"
 alias gdmb="diff_merge_base"
 alias gcp="git cherry-pick"
 alias gam="git commit --amend -a --no-edit"
@@ -138,32 +138,33 @@ function branch_freshness() {
 }
 
 function gsq() {
-  git rebase -i `git merge-base HEAD master`
+  git rebase -i `git merge-base HEAD main`
 }
 
 function current_branch() {
+  # git symbolic-ref --short -q HEAD
   git symbolic-ref HEAD | sed 's/refs\/heads\///'
 }
 
-function git_rebase_onto_latest_master() {
+function git_rebase_onto_latest_main() {
   temp_current_branch=$(current_branch)
   git fetch origin
-  git branch -f master origin/master
+  git branch -f main origin/main
   git checkout "$temp_current_branch"
-  git rebase master
+  git rebase main
 }
 
 function diff_merge_base() {
-  base=$(git merge-base origin/master `current_branch`)
+  base=$(git merge-base origin/main `current_branch`)
   git diff --color-words $base $@
 }
 
 function git_push_current_branch() {
   local_current_branch=$( current_branch )
-  if [[ "$local_current_branch" == "master" ]]; then
+  if [[ "$local_current_branch" == "main" ]]; then
     if [[ "$1" == "+" ]]; then
       if [[ "$2" == "--force-no-really-i-mean-it" ]]; then
-        echo "Don't force push master, you idiot"
+        echo "Don't force push main, you idiot"
         return
       fi
     fi
