@@ -36,3 +36,9 @@ setopt extendedglob
 #  ls /etc/**/zsh           # which directories contain 'zsh'?
 #  ls **/*(-@)              # list dangling symlinks ('**' recurses down directory trees)
 #  ls foo*~*bar*            # match everything that starts with foo but doesn't contain bar
+
+export EDITOR=vi
+
+#inputrc isn't respecting the control left-arrow stuff for some reason
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word

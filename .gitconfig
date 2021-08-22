@@ -6,10 +6,7 @@
   detachedHead = false
 
 [hub]
-  protocol = https
-
-[credential]
-	helper = osxkeychain
+  protocol = ssh
 
 [core]
 	excludesfile = /Users/richardmcgain/.gitignore-global
@@ -55,3 +52,5 @@
 	required = true
 [init]
 	defaultBranch = main
+[url "git@github.com:"]
+	insteadOf = https://github.com/

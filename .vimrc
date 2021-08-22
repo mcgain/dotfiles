@@ -22,14 +22,18 @@ let mapleader=","
 Plug 'zsugabubus/vim-paperplane' "Shows the context of the file, hopefully
 
 "Fuzzy file finding
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
 
 " Find the string under the cursor accross files in project, using fzf and rg
 set grepprg=rg\ --vimgrep
-command! -bang -nargs=* RipGrepFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=*
+      \ RipGrepFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+command! -bang -complete=dir
+      \ Files call fzf#vim#files(<q-args>, {'source': 'rg --files --no-ignore-vcs -g "!node_modules"'}, <bang>0)
 nnoremap <leader>p :RipGrepFind <c-r><c-w><cr>
 
 " Find all files in all non-dot directories starting in the working directory.
@@ -86,8 +90,9 @@ let g:ruby_indent_assignment_style = 'variable'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
+Plug 'slim-template/vim-slim'
 
-" change {} to do end with gS and gJ
+" change {} to do end with gS and gJ ruby blocks etc
 Plug 'AndrewRadev/splitjoin.vim'
 
 autocmd FileType ruby setlocal iskeyword+=?,! " include ? and ! in ruby words
@@ -126,6 +131,9 @@ Plug 'peitalin/vim-jsx-typescript'
 
 Plug 'ludovicchabant/vim-gutentags' "For ctags
 
+"Javascript
+Plug 'pangloss/vim-javascript'
+
 Plug 'elixir-lang/vim-elixir'
 
 Plug 'bogado/file-line'
@@ -148,6 +156,8 @@ let g:ale_fix_on_save = 1
 "required for vim-textobj-rubyblock
 runtime macros/matchit.vim
 
+"svelte
+au! BufNewFile,BufRead *.svelte set ft=html
 
 "force *.md to markdown instead of modula-2
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
