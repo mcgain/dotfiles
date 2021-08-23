@@ -18,57 +18,56 @@ call plug#begin('~/.vim/bundle')
 
 let mapleader="," " This needs to be before all my <leader> mappings
 
-Plug 'zsugabubus/vim-paperplane' "Shows the context of the file, hopefully
-
 "Fuzzy file finding
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
 " Find the string under the cursor accross files in project, using fzf and rg
 set grepprg=rg\ --vimgrep
 command! -bang -nargs=* RipGrepFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-
 command! -bang -complete=dir
       \ Files call fzf#vim#files(<q-args>, {'source': 'rg --files --no-ignore-vcs -g "!node_modules"'}, <bang>0)
 nnoremap <leader>p :RipGrepFind <c-r><c-w><cr>
-
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>o :Files<cr>
 
-Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'vim-scripts/ReplaceWithRegister' "{register, defaults to \"}"gr{motion}
-Plug 'mattn/webapi-vim'
-Plug 'tomtom/tcomment_vim'
-Plug 'dockyard/vim-easydir'
+Plug 'tpope/vim-surround' "useful cs{( kinda stuff
+Plug 'tpope/vim-repeat' "very important, works with a bunch of stuff
+Plug 'vim-scripts/ReplaceWithRegister' "{register, defaults to \"}\"gr{motion}
+Plug 'tomtom/tcomment_vim' "gcc commenting
+Plug 'dockyard/vim-easydir' "Create intermediate folders when writing files
 Plug 'tommcdo/vim-exchange' "Exchange two regions of text with cx
 Plug 'Yggdroot/indentLine' "Thin vertical lines on indents <F6>
-Plug 'bling/vim-airline'
-
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
+let g:indentLine_enabled = 0
+let g:indentLine_color_term = 239
+let g:indentLine_char = '|'
+nmap <F6> :IndentLinesToggle<CR>
+Plug 'bling/vim-airline' "status line thing down the bottom
+Plug 'airblade/vim-gitgutter' "+ - etc. in the left hand column
+Plug 'tpope/vim-fugitive' "git stuff
 Plug 'tpope/vim-rhubarb' " #Github integration for fugitive
-Plug 'mmozuras/vim-github-comment'
-
-" custom text objects
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-entire'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-syntax'
-Plug 'kana/vim-textobj-line'
-Plug 'nelstrom/vim-textobj-rubyblock'
+let g:github_user = 'mcgain'
 Plug 'wellle/targets.vim' "so many more text objects
-Plug 'michaeljsmith/vim-indent-object' "does this do the same thing as
-" the indent thing above
+Plug 'AndrewRadev/splitjoin.vim' " change {} to do end with gS and gJ ruby blocks etc
+Plug 'bogado/file-line' "can open files with line numbers: vim foo.rb:20
+Plug 'ludovicchabant/vim-gutentags' "For ctags
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "dunno what this is for the language client needs it i think
+let g:deoplete#enable_at_startup = 1
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop / prettier
+let g:ale_fixers = {
+\ 'javascript': ['prettier'],
+\ 'css': ['prettier'],
+\ 'ruby': ['prettier'],
+\}
+let g:ale_linters_explicit = 1 " Disable auto ALE, just do the stuff above
+let g:ale_fix_on_save = 1
 
 "go to two characters with s. sea goes to the next occurence of ea
 " with operators, its used with z, so dtzab deletes to the next occurence of
 " ab
 Plug 'justinmk/vim-sneak'
-
-"Some new ones from a tope talk
 Plug 'tpope/vim-endwise' "Adds end to defs and ifs and stuff
 Plug 'tpope/vim-abolish' "substitutions for :Subert/di{e,ce}/spinner{,s}/
 
@@ -79,40 +78,27 @@ Plug 'tpope/vim-eunuch'
 " ruby
 Plug 'vim-ruby/vim-ruby'
 let g:ruby_indent_assignment_style = 'variable'
-
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-rake'
 Plug 'tpope/vim-rails'
-Plug 'slim-template/vim-slim'
-
-" change {} to do end with gS and gJ ruby blocks etc
-Plug 'AndrewRadev/splitjoin.vim'
-
+Plug 'kana/vim-textobj-user' " custom text objects
+Plug 'nelstrom/vim-textobj-rubyblock'
+runtime macros/matchit.vim "required for vim-textobj-rubyblock
 autocmd FileType ruby setlocal iskeyword+=?,! " include ? and ! in ruby words
+nnoremap <Leader>; :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR> "1.8 to 1.9 Hash
 
-"open current target in split
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+autocmd BufWrite * call g:ChmodOnWrite()
+autocmd FileType ruby nmap <buffer> <leader>m <Plug>(xmpfilter-mark)
+autocmd FileType ruby xmap <buffer> <leader>m <Plug>(xmpfilter-mark)
+autocmd FileType ruby imap <buffer> <leader>m <Plug>(xmpfilter-mark)
 
-"open godoc under cursor
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-
-"list of interfaces implemented by type
-au FileType go nmap <Leader>s <Plug>(go-implements)
-
-"Rust
-let g:rustfmt_command='cargo fmt'
-let g:rustfmt_autosave = 1
-Plug 'wting/rust.vim'
-
-"tags
-set tags=./tags;/
+autocmd FileType ruby nmap <buffer> <leader>r <Plug>(xmpfilter-run)
+autocmd FileType ruby xmap <buffer> <leader>r <Plug>(xmpfilter-run)
+autocmd FileType ruby imap <buffer> <leader>r <Plug>(xmpfilter-run)
 
 "Markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown "force *.md to markdown instead of modula-2
 
 " Lua
 Plug 'vim-scripts/lua.vim'
@@ -121,44 +107,18 @@ Plug 'vim-scripts/vim-misc'
 "Javascript / Typescript / React
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-
-Plug 'ludovicchabant/vim-gutentags' "For ctags
-
-"Javascript
 Plug 'pangloss/vim-javascript'
-Plug 'elixir-lang/vim-elixir'
-
-Plug 'bogado/file-line' "can open files with line numbers: vim foo.rb:20
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "dunno what this is for the language client needs it i think
-let g:deoplete#enable_at_startup = 1
-
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-
-Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop / prettier
-
-let g:ale_fixers = {
-\ 'javascript': ['prettier'],
-\ 'css': ['prettier'],
-\ 'ruby': ['prettier'],
-\}
-let g:ale_linters_explicit = 1 " Disable auto ALE, just do the stuff above
-let g:ale_fix_on_save = 1
-
-"required for vim-textobj-rubyblock
-runtime macros/matchit.vim
 
 "svelte
 au! BufNewFile,BufRead *.svelte set ft=html
 
-"force *.md to markdown instead of modula-2
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+"tags
+set tags=./tags;/
 
 set termguicolors "in vim8
 set background=dark
 highlight SignColumn ctermbg=234
 highlight LineNr ctermbg=234
-
 set tabstop=2
 set expandtab
 set number "line numbers on the left
@@ -176,8 +136,8 @@ set nobackup "no backup files
 set nowritebackup "only in case you don't want a backup file while editing
 set noswapfile "no swap files
 set synmaxcol=120 "only do syntax highlighting up to 120 chars on long lines
-
 set clipboard=unnamed "use system keyboard
+set laststatus=2 " statusbar always
 
 highlight MatchParen ctermbg=4 "highlight the paired bracket in colour 4
 
@@ -201,38 +161,15 @@ noremap   <Right>  <NOP>
 inoremap fj <esc>:w<cr>
 nnoremap fj :w<cr>
 
-" supertab
-" imap <tab> g:SuperTabDefaultCompletionType
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"      LEADER KEYS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"1.8 to 1.9 Hash
-nnoremap <Leader>; :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
-
 "Last file in jumplist
 map ,, <C-^>
-
-" statusbar always
-set laststatus=2
-" ;a is <ESC>
-inoremap ;a <Esc>
-
-" tagbar
-map <leader>/ :TagbarToggle<CR>
 
 " copy current file path to clipboard
 map <leader>@ :let @+ = expand("%:p")<CR>
 " ,% copy filename to clipboard
 nmap <Leader>% :let<Space>@*=@%<CR>
 
-" K inserts newline under cursor in normal mode
-nnoremap K i<CR><Esc>
-
-" * and # search for next/previous of selected text when used in visual mode
-xno * :<c-u>cal<SID>VisualSearch()<cr>/<cr>
-xno # :<c-u>cal<SID>VisualSearch()<cr>?<cr>
+nnoremap K i<CR><Esc> " K inserts newline under cursor in normal mode
 
 " DANGER this removes all whitespace at end of lines on write
 " This could screw up files. I guess I will find out which!
@@ -249,18 +186,11 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-
 set splitbelow
 set splitright
 
-" nnoremap <c-m> :set invpaste paste?<CR>
-" set pastetoggle=<c-m>
-set showmode
-
+set showmode nosmd
 set wildmenu            " visual autocomplete for command menu
-" set lazyredraw          " redraw only when we need to. SEEMS VERY SLOW
-"github
-let g:github_user = 'mcgain'
 
 " Goto next git hunk
 nmap <leader>n <Plug>GitGutterNextHunk
@@ -272,15 +202,6 @@ tnoremap <Esc> <C-\><C-n>
 "highlight lines that are too long
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%121v.\+/
-
-let g:indentLine_enabled = 0
-let g:indentLine_color_term = 239
-let g:indentLine_char = '|'
-nmap <F6> :IndentLinesToggle<CR>
-
-"Doc search with zeal
-Plug 'KabbAmine/zeavim.vim'
-let g:zv_zeal_executable = '/mnt/c/Program Files/Zeal/zeal.exe'
 
 nmap <leader>z :let @+ = expand("%")<CR>
 
@@ -294,21 +215,11 @@ function! g:ChmodOnWrite()
   endif
 endfunction
 
-autocmd BufWrite * call g:ChmodOnWrite()
-autocmd FileType ruby nmap <buffer> <leader>m <Plug>(xmpfilter-mark)
-autocmd FileType ruby xmap <buffer> <leader>m <Plug>(xmpfilter-mark)
-autocmd FileType ruby imap <buffer> <leader>m <Plug>(xmpfilter-mark)
-
-autocmd FileType ruby nmap <buffer> <leader>r <Plug>(xmpfilter-run)
-autocmd FileType ruby xmap <buffer> <leader>r <Plug>(xmpfilter-run)
-autocmd FileType ruby imap <buffer> <leader>r <Plug>(xmpfilter-run)
-
 "Now I'm using <leader>o for opening files, in normal mode I need to disable
 " the default thing for new tabs
 nmap <leader>t <ESC>
 
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
-
 call plug#end()
 
 " this needs to be called after plug#end
@@ -326,4 +237,3 @@ let g:airline_section_z = ''
 call airline#parts#define_function('ALE', 'ALEGetStatusLine')
 call airline#parts#define_condition('ALE', 'exists("*ALEGetStatusLine")')
 let g:airline_section_error = airline#section#create_right(['ALE'])
-
