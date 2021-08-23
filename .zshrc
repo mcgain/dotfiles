@@ -31,18 +31,16 @@ cd ~ # go home
 source ~/.welcome.zsh
 
 alias dotfiles="/usr/bin/git --git-dir=$HOME/src/dotfiles/ --work-tree=$HOME"
-=======
 export PATH=$PATH:/home/mcgain/postgres/bin
 export PGDATA=/home/mcgain/postgres/data
 export PATH=$PATH:/home/mcgain/.local/bin
 export PATH=$PATH:/opt/chrome-linux/
 export PATH=$PATH:/home/mcgain/.yarn/bin
 export PATH=$PATH:/home/mcgain/bin
-cd ~ # go home
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
-chruby ruby-2.7
+chruby ruby-3.0.1
 
 
 export PATH="$HOME/.cargo/bin:$PATH"

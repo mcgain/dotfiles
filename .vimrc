@@ -16,8 +16,7 @@ augroup END " }
 
 call plug#begin('~/.vim/bundle')
 
-" This needs to be before all my <leader> mappings
-let mapleader=","
+let mapleader="," " This needs to be before all my <leader> mappings
 
 Plug 'zsugabubus/vim-paperplane' "Shows the context of the file, hopefully
 
@@ -25,12 +24,9 @@ Plug 'zsugabubus/vim-paperplane' "Shows the context of the file, hopefully
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
-
 " Find the string under the cursor accross files in project, using fzf and rg
 set grepprg=rg\ --vimgrep
-command! -bang -nargs=*
-      \ RipGrepFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* RipGrepFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 command! -bang -complete=dir
       \ Files call fzf#vim#files(<q-args>, {'source': 'rg --files --no-ignore-vcs -g "!node_modules"'}, <bang>0)
@@ -40,16 +36,13 @@ nnoremap <leader>p :RipGrepFind <c-r><c-w><cr>
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>o :Files<cr>
 
-Plug 'altercation/vim-colors-solarized'
-Plug 'sickill/vim-monokai'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'vim-scripts/ReplaceWithRegister' "{register, defaults to "}"gr{motion}
+Plug 'vim-scripts/ReplaceWithRegister' "{register, defaults to \"}"gr{motion}
 Plug 'mattn/webapi-vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'dockyard/vim-easydir'
-Plug 'croaker/mustang-vim' "colourscheme
 Plug 'tommcdo/vim-exchange' "Exchange two regions of text with cx
 Plug 'Yggdroot/indentLine' "Thin vertical lines on indents <F6>
 Plug 'bling/vim-airline'
@@ -133,10 +126,9 @@ Plug 'ludovicchabant/vim-gutentags' "For ctags
 
 "Javascript
 Plug 'pangloss/vim-javascript'
-
 Plug 'elixir-lang/vim-elixir'
 
-Plug 'bogado/file-line'
+Plug 'bogado/file-line' "can open files with line numbers: vim foo.rb:20
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "dunno what this is for the language client needs it i think
 let g:deoplete#enable_at_startup = 1
@@ -169,17 +161,17 @@ highlight LineNr ctermbg=234
 
 set tabstop=2
 set expandtab
-set number
-set ignorecase
-set hlsearch
-set nocp
+set number "line numbers on the left
+set ignorecase "ignore case in patterns
+set hlsearch "highlight searches
+set nocp "nocompatible - nvim is always this
 set softtabstop=2
 set shiftwidth=2
 set scrolloff=5 "alway have 5 lines at top/bottom of file when scrolling
 set cindent
 set autoindent
 set smarttab
-set cursorline
+set cursorline "highlight the current line
 set nobackup "no backup files
 set nowritebackup "only in case you don't want a backup file while editing
 set noswapfile "no swap files
@@ -187,12 +179,15 @@ set synmaxcol=120 "only do syntax highlighting up to 120 chars on long lines
 
 set clipboard=unnamed "use system keyboard
 
-highlight MatchParen ctermbg=4
+highlight MatchParen ctermbg=4 "highlight the paired bracket in colour 4
 
 filetype plugin indent on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 "disabling these keys should help me stop reaching for those keys
+" reminder:
+" with i = insert mode. Without i = normal mode
+" noremap = map the key and don't allow any more mapping
 inoremap  <Up>     <NOP>
 inoremap  <Down>   <NOP>
 inoremap  <Left>   <NOP>
@@ -312,13 +307,18 @@ autocmd FileType ruby imap <buffer> <leader>r <Plug>(xmpfilter-run)
 " the default thing for new tabs
 nmap <leader>t <ESC>
 
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+
 call plug#end()
 
 " this needs to be called after plug#end
 call deoplete#custom#var('tabnine', { 'line_limit': 500, 'max_num_results': 20 })
 
+colorscheme onehalfdark "must be called after plug#end
+
 "Airline Configuration
 " the calls must be after plug#end
+let g:airline_theme='onehalfdark'
 let g:airline_powerline_fonts = 1
 let g:airline_section_x = ''
 let g:airline_section_y = ''
@@ -327,8 +327,3 @@ call airline#parts#define_function('ALE', 'ALEGetStatusLine')
 call airline#parts#define_condition('ALE', 'exists("*ALEGetStatusLine")')
 let g:airline_section_error = airline#section#create_right(['ALE'])
 
-colorscheme mustang
-if &diff
-  let g:solarized_termcolors=256
-  colorscheme solarized
-endif
