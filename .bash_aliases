@@ -9,7 +9,7 @@ function dev_to_development_version() {
 }
 
 alias c=clear
-alias vi=nvim
+alias vi='~/bin/nvim.appimage'
 alias todo=todo2
 alias reboot='sudo shutdown -r now'
 alias f="find -n"
