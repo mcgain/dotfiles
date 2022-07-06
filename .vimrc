@@ -24,8 +24,7 @@ Plug 'junegunn/fzf.vim'
 " Find the string under the cursor accross files in project, using fzf and rg
 set grepprg=rg\ --vimgrep
 command! -bang -nargs=* RipGrepFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-command! -bang -complete=dir
-      \ Files call fzf#vim#files(<q-args>, {'source': 'rg --files --no-ignore-vcs -g "!node_modules"'}, <bang>0)
+command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files --no-ignore-vcs -g "!node_modules"'}, <bang>0)
 nnoremap <leader>p :RipGrepFind <c-r><c-w><cr>
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
@@ -50,7 +49,6 @@ let g:github_user = 'mcgain'
 Plug 'wellle/targets.vim' "so many more text objects
 Plug 'AndrewRadev/splitjoin.vim' " change {} to do end with gS and gJ ruby blocks etc
 Plug 'bogado/file-line' "can open files with line numbers: vim foo.rb:20
-Plug 'ludovicchabant/vim-gutentags' "For ctags
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "dunno what this is for the language client needs it i think
 let g:deoplete#enable_at_startup = 1
@@ -58,6 +56,7 @@ Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop / prettier
 let g:ale_fixers = {
 \ 'javascript': ['prettier'],
+\ 'typescript': ['prettier'],
 \ 'css': ['prettier'],
 \ 'ruby': ['prettier'],
 \}
@@ -220,7 +219,18 @@ endfunction
 nmap <leader>t <ESC>
 
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
+
+
+
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
+
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+"   ensure_installed = {"ruby", "javascript", "typescript", "json", "markdown"},
+" }
+" EOF
 
 " this needs to be called after plug#end
 call deoplete#custom#var('tabnine', { 'line_limit': 500, 'max_num_results': 20 })

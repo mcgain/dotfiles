@@ -22,6 +22,9 @@
 [push]
 	default = matching
 
+[checkout]
+  defaultRemote = origin
+
 [alias]
 	ctags = !.git/hooks/ctags
 

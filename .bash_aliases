@@ -222,17 +222,17 @@ function current_branch() {
 function git_rebase_onto_latest_master() {
   temp_current_branch=$(current_branch)
   git fetch origin
-  git branch -f master origin/master
+  git branch -f master origin/main
   git checkout "$temp_current_branch"
   git rebase master
 }
 
 function git_push_current_branch() {
   local_current_branch=$( current_branch )
-  if [[ "$local_current_branch" == "master" ]]; then
+  if [[ "$local_current_branch" == "main" ]]; then
     if [[ "$1" == "+" ]]; then
       if [[ "$2" == "--force-no-really-i-mean-it" ]]; then
-        echo "Don't force push master, you idiot"
+        echo "Don't force push main, you idiot"
         return
       fi
     fi
