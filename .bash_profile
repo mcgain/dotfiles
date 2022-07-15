@@ -1,5 +1,4 @@
 echo ".bash_profile"
-export PATH="$HOME/.cargo/bin:$PATH"
 
 source /home/mcgain/.config/broot/launcher/bash/br
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -10,3 +9,4 @@ if [ -t 1 ]; then
 	echo "execcing zsh"
 	exec zsh
 fi
+. "$HOME/.cargo/env"

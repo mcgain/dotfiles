@@ -19,13 +19,9 @@ call plug#begin('~/.vim/bundle')
 let mapleader="," " This needs to be before all my <leader> mappings
 
 "Fuzzy file finding
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Find the string under the cursor accross files in project, using fzf and rg
-set grepprg=rg\ --vimgrep
-command! -bang -nargs=* RipGrepFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'source': 'rg --files --no-ignore-vcs -g "!node_modules"'}, <bang>0)
-nnoremap <leader>p :RipGrepFind <c-r><c-w><cr>
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>o :Files<cr>
@@ -109,7 +105,8 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'pangloss/vim-javascript'
 
 "svelte
-au! BufNewFile,BufRead *.svelte set ft=html
+" au! BufNewFile,BufRead *.svelte set ft=html
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 
 "tags
 set tags=./tags;/
@@ -134,7 +131,7 @@ set cursorline "highlight the current line
 set nobackup "no backup files
 set nowritebackup "only in case you don't want a backup file while editing
 set noswapfile "no swap files
-set synmaxcol=120 "only do syntax highlighting up to 120 chars on long lines
+set synmaxcol=920 "only do syntax highlighting up to 120 chars on long lines (changed to 920 due to annoyance)
 set clipboard=unnamed "use system keyboard
 set laststatus=2 " statusbar always
 
@@ -213,6 +210,9 @@ function! g:ChmodOnWrite()
     silent !chmod u+w %
   endif
 endfunction
+
+
+Plug 'github/copilot.vim'
 
 "Now I'm using <leader>o for opening files, in normal mode I need to disable
 " the default thing for new tabs
