@@ -1,5 +1,5 @@
 # cloudplatform: add Shopify clusters to your local kubernetes config
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}$HOME/.kube/config:$HOME/.kube/config.shopify.cloudplatform
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}$HOME/.kube/config:$HOME/.kube/config.shopify.cloudplatform:$HOME/.kube/config-turing-pi
 fpath=(~/.zsh/plugins/ $fpath)
 
 export EDITOR=nvim
