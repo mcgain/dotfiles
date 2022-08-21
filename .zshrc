@@ -58,3 +58,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+export MANPAGER="sh -c 'col -bx | batcat -l man -p'"

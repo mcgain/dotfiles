@@ -13,6 +13,7 @@ alias vim="nvim"
 alias c="clear"
 alias less="less -R"
 alias resource="source ~/.aliases.zsh"
+alias cat=batcat
 
 alias ll='ls -l'
 alias la='ls -a'
