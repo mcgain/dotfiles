@@ -50,7 +50,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
-
+export PATH="/Users/mcgain/Library/Python/3.9/bin:$PATH"
 . /usr/local/opt/asdf/libexec/asdf.sh
 export PATH="/usr/local/sbin:$PATH"
 export NVM_DIR="$HOME/.nvm"
@@ -58,4 +58,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"

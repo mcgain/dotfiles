@@ -89,7 +89,7 @@ alias gs='git status'
 alias gc='git commit'
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gl="git log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gb='branch_freshness'
+alias gb='branch_freshness | head -n $((($LINES - 4)))'
 alias gd='git diff --color-words'
 alias gdom='git diff --color-words origin/main'
 alias gga='git ls-files -dmo --exclude-standard | grep "$*" | xargs -r git add'
