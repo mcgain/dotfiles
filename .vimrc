@@ -32,11 +32,11 @@ Plug 'vim-scripts/ReplaceWithRegister' "{register, defaults to \"}\"gr{motion}
 Plug 'tomtom/tcomment_vim' "gcc commenting
 Plug 'dockyard/vim-easydir' "Create intermediate folders when writing files
 Plug 'tommcdo/vim-exchange' "Exchange two regions of text with cx
-Plug 'Yggdroot/indentLine' "Thin vertical lines on indents <F6>
-let g:indentLine_enabled = 0
-let g:indentLine_color_term = 239
-let g:indentLine_char = '|'
-nmap <F6> :IndentLinesToggle<CR>
+" Plug 'Yggdroot/indentLine' "Thin vertical lines on indents <F6>
+" let g:indentLine_enabled = 0
+" let g:indentLine_color_term = 239
+" let g:indentLine_char = '|'
+" nmap <F6> :IndentLinesToggle<CR>
 Plug 'bling/vim-airline' "status line thing down the bottom
 Plug 'airblade/vim-gitgutter' "+ - etc. in the left hand column
 Plug 'tpope/vim-fugitive' "git stuff

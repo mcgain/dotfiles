@@ -13,7 +13,14 @@ alias vim="nvim"
 alias c="clear"
 alias less="less -R"
 alias resource="source ~/.aliases.zsh"
-alias cat=batcat
+
+# the bat command has different names on linux vs mac
+if type "bat" > /dev/null; then
+  alias cat=bat
+fi
+if type "batcat" > /dev/null; then
+  alias cat=batcat
+fi
 
 alias ll='ls -l'
 alias la='ls -a'
@@ -132,7 +139,7 @@ function branch_freshness() {
   format_str="%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)"
   if [[ "$#" -eq 0 ]]
   then
-    git for-each-ref --sort=-committerdate refs/heads/ --format=$format_str --color | /usr/local/opt/util-linux/bin/column -s '|' -t -c $COLUMNS -T 3
+    git for-each-ref --sort=-committerdate refs/heads/ --format=$format_str --color | /opt/homebrew/opt/util-linux/bin/column -s '|' -t -c $COLUMNS -T 3
     return
   fi
   git branch $@

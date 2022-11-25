@@ -8,7 +8,7 @@ export EDITOR=nvim
 
 source ~/.zshoptions.zsh
 source ~/.aliases.zsh
-# source ~/.ferocia-specific.zsh
+source ~/.ferocia.zsh
 
 # https://github.com/sindresorhus/pure
 # fpath+=/home/mcgain/.zsh/plugins/pure
@@ -29,9 +29,8 @@ source ~/.welcome.zsh
 
 alias dotfiles="/usr/bin/git --git-dir=$HOME/src/dotfiles/ --work-tree=$HOME"
 # alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
-export PATH=$PATH:/home/mcgain/postgres/bin
 export PGUSER=postgres
-export PGDATA=/home/mcgain/postgres/data
+# export PGDATA=/home/mcgain/postgres/data
 export PATH=$PATH:/home/mcgain/.local/bin
 export PATH=$PATH:/opt/chrome-linux/
 export PATH=$PATH:/home/mcgain/.yarn/bin
@@ -51,11 +50,19 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 export PATH="/Users/mcgain/Library/Python/3.9/bin:$PATH"
-. /usr/local/opt/asdf/libexec/asdf.sh
 export PATH="/usr/local/sbin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+export PATH=$PATH:/home/mcgain/postgres/bin
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(/opt/homebrew/bin/brew --prefix openssl@1.1)"
+export PATH="opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
