@@ -1,6 +1,5 @@
 "Richard McGain's Dotfiles
 set nocompatible
-
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -18,8 +17,8 @@ call plug#begin('~/.vim/bundle')
 
 let mapleader="," " This needs to be before all my <leader> mappings
 
-"Fuzzy file finding
-Plug 'junegunn/fzf.vim'
+ "Fuzzy file finding
+ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 " Find all files in all non-dot directories starting in the working directory.
@@ -46,19 +45,11 @@ Plug 'wellle/targets.vim' "so many more text objects
 Plug 'AndrewRadev/splitjoin.vim' " change {} to do end with gS and gJ ruby blocks etc
 Plug 'bogado/file-line' "can open files with line numbers: vim foo.rb:20
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "dunno what this is for the language client needs it i think
-let g:deoplete#enable_at_startup = 1
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-Plug 'w0rp/ale' "Asynchronous Lint Engine, runs rubocop / prettier
-let g:ale_fixers = {
-\ 'javascript': ['prettier'],
-\ 'typescript': ['prettier'],
-\ 'css': ['prettier'],
-\ 'ruby': ['prettier'],
-\}
-let g:ale_linters_explicit = 1 " Disable auto ALE, just do the stuff above
-let g:ale_fix_on_save = 1
-
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+"format on save
+let g:prettier#autoformat = 1
+" format all files
+let g:prettier#autoformat_require_pragma = 0
 "go to two characters with s. sea goes to the next occurence of ea
 " with operators, its used with z, so dtzab deletes to the next occurence of
 " ab
@@ -172,9 +163,9 @@ nnoremap K i<CR><Esc> " K inserts newline under cursor in normal mode
 autocmd BufWritePre * :%s/\s\+$//e
 
 fun! s:VisualSearch()
-  let old = @" | norm! gvy
-  let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')
-  let @" = old
+let old = @" | norm! gvy
+let @/ = '\V'.substitute(escape(@", '\'), '\n', '\\n', 'g')
+let @" = old
 endf
 
 " better splits
@@ -206,11 +197,10 @@ iabbr xxx puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
 "make everything writable when I want to write it
 function! g:ChmodOnWrite()
-  if v:cmdbang
-    silent !chmod u+w %
-  endif
+if v:cmdbang
+silent !chmod u+w %
+endif
 endfunction
-
 
 Plug 'github/copilot.vim'
 
@@ -220,20 +210,10 @@ nmap <leader>t <ESC>
 
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'neovim/nvim-lspconfig'
 
-
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
-
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-"   ensure_installed = {"ruby", "javascript", "typescript", "json", "markdown"},
-" }
-" EOF
-
-" this needs to be called after plug#end
-call deoplete#custom#var('tabnine', { 'line_limit': 500, 'max_num_results': 20 })
 
 colorscheme onehalfdark "must be called after plug#end
 
@@ -247,3 +227,33 @@ let g:airline_section_z = ''
 call airline#parts#define_function('ALE', 'ALEGetStatusLine')
 call airline#parts#define_condition('ALE', 'exists("*ALEGetStatusLine")')
 let g:airline_section_error = airline#section#create_right(['ALE'])
+
+"needs to be after plug#end
+lua << EOF
+  require'nvim-treesitter.configs'.setup {
+    -- A list of parser names, or "all"
+    ensure_installed = { "lua", "rust", "ruby", "javascript", "html", "css", "tsx", "typescript", "json", "bash", "python", "go", "java", "yaml", "toml", "regex", "nix", "dockerfile", "graphql",   "vim"},
+    sync_install = false,
+    -- Automatically install missing parsers when entering buffer
+    -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+    auto_install = true,
+    ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+    -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+    highlight = {
+      enable = true,
+      -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+      -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+      -- the name of the parser)
+
+      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+      -- Using this option may slow down your editor, and you may see some duplicate highlights.
+      -- Instead of true it can also be a list of languages
+      additional_vim_regex_highlighting = false,
+    },
+  }
+
+  -- Solargraph for my LSP
+  require'lspconfig'.solargraph.setup{}
+EOF
+

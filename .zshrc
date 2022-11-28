@@ -41,6 +41,8 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 chruby ruby-3.0.1
 
+export FLYCTL_INSTALL="/home/mcgain/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 source /home/mcgain/.config/broot/launcher/bash/br
