@@ -6,7 +6,7 @@
   detachedHead = false
 
 [core]
-    pager = bat
+    pager = less
 
 [interactive]
     diffFilter = delta --color-only

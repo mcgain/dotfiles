@@ -21,7 +21,7 @@ eval "$(starship init zsh)"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
-
+export PATH="/mnt/c/Users/mcgai/AppData/Local/Programs/Microsoft\ VS\ Code\ Insiders/bin/:$PATH"
 
 cd ~ # go home
 

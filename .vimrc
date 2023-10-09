@@ -31,11 +31,6 @@ Plug 'vim-scripts/ReplaceWithRegister' "{register, defaults to \"}\"gr{motion}
 Plug 'tomtom/tcomment_vim' "gcc commenting
 Plug 'dockyard/vim-easydir' "Create intermediate folders when writing files
 Plug 'tommcdo/vim-exchange' "Exchange two regions of text with cx
-" Plug 'Yggdroot/indentLine' "Thin vertical lines on indents <F6>
-" let g:indentLine_enabled = 0
-" let g:indentLine_color_term = 239
-" let g:indentLine_char = '|'
-" nmap <F6> :IndentLinesToggle<CR>
 Plug 'bling/vim-airline' "status line thing down the bottom
 Plug 'airblade/vim-gitgutter' "+ - etc. in the left hand column
 Plug 'tpope/vim-fugitive' "git stuff
@@ -203,6 +198,10 @@ endif
 endfunction
 
 Plug 'github/copilot.vim'
+imap <silent><script><expr> <C-J> copilot#Accept("")
+let g:copilot_filetypes = {
+      \ 'yaml': v:true,
+      \ }
 
 "Now I'm using <leader>o for opening files, in normal mode I need to disable
 " the default thing for new tabs
@@ -232,7 +231,7 @@ let g:airline_section_error = airline#section#create_right(['ALE'])
 lua << EOF
   require'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
-    ensure_installed = { "lua", "rust", "ruby", "javascript", "html", "css", "tsx", "typescript", "json", "bash", "python", "go", "java", "yaml", "toml", "regex", "nix", "dockerfile", "graphql",   "vim"},
+    ensure_installed = { "lua", "rust", "ruby", "javascript", "html", "css", "tsx", "typescript", "json", "bash", "python", "go", "java", "yaml", "toml", "regex", "nix", "dockerfile", "graphql", "vim"},
     sync_install = false,
     -- Automatically install missing parsers when entering buffer
     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
